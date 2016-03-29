@@ -1,6 +1,7 @@
 " Vim color file
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last Change:	2001 Jul 23
+" Maintainer:	Zach Taira
+" Last Change:	5/16/2016
+" Modified color scheme - original by Bram Moolenaar <Bram@vim.org>
 
 " This is the default color scheme.  It doesn't define the Normal
 " highlighting, it uses whatever the colors used to be.
@@ -70,30 +71,39 @@ endfunction
 let s:colors = {}
 
 " Base colors.
-let s:colors.base0 = { 'gui': '#0c1014', 'cterm': 232 }
-let s:colors.base1 = { 'gui': '#11151c', 'cterm': 233 }
-let s:colors.base2 = { 'gui': '#091f2e', 'cterm': 17  }
-let s:colors.base3 = { 'gui': '#0a3749', 'cterm': 18  }
-let s:colors.base4 = { 'gui': '#245361', 'cterm': 24  }
-let s:colors.base5 = { 'gui': '#599cab', 'cterm': 81  }
-let s:colors.base6 = { 'gui': '#000000', 'cterm': 33 }
-let s:colors.base7 = { 'gui': '#d3ebe9', 'cterm': 88 }
+" background 234
+let s:colors.base0 = { 'gui': '#0c1014', 'cterm': 234 }
+" column highlighting 235
+let s:colors.base1 = { 'gui': '#11151c', 'cterm': 235 }
+" statusbar 238
+let s:colors.base2 = { 'gui': '#091f2e', 'cterm': 240  }
+" visual select 236
+let s:colors.base3 = { 'gui': '#0a3749', 'cterm': 236  }
+" comments 240
+let s:colors.base4 = { 'gui': '#245361', 'cterm': 240  }
+" ???
+let s:colors.base5 = { 'gui': '#599cab', 'cterm': 2  }
+" text 244
+let s:colors.base6 = { 'gui': '#000000', 'cterm': 244 }
+" ???
+let s:colors.base7 = { 'gui': '#d3ebe9', 'cterm': 3 }
 
 " Other colors.
-let s:colors.red     = { 'gui': '#c23127', 'cterm': 124 }
-let s:colors.orange  = { 'gui': '#d26937', 'cterm': 166 }
-let s:colors.yellow  = { 'gui': '#edb443', 'cterm': 214 }
-let s:colors.magenta = { 'gui': '#888ca6', 'cterm': 67  }
+let s:colors.red     = { 'gui': '#c23127', 'cterm': 167 }
+let s:colors.orange  = { 'gui': '#d26937', 'cterm': 173 }
+let s:colors.yellow  = { 'gui': '#edb443', 'cterm': 106 }
+" ???
+let s:colors.magenta = { 'gui': '#888ca6', 'cterm': 1 }
 let s:colors.violet  = { 'gui': '#4e5166', 'cterm': 60  }
 let s:colors.blue    = { 'gui': '#195466', 'cterm': 24  }
-let s:colors.cyan    = { 'gui': '#33859E', 'cterm': 44  }
-let s:colors.green   = { 'gui': '#2aa889', 'cterm': 234 }
+let s:colors.cyan    = { 'gui': '#33859E', 'cterm': 6  }
+let s:colors.green   = { 'gui': '#2aa889', 'cterm': 29 }
 
 
 " Native highlighting ==========================================================
 
 let s:background = 'base0'
-let s:linenr_background = 'base1'
+let s:linenr_background = 'base0'
 
 " Everything starts here.
 call s:Col('Normal', 'base6', s:background)
@@ -101,13 +111,13 @@ call s:Col('Normal', 'base6', s:background)
 " Line, cursor and so on.
 set cursorline
 set cursorcolumn
-call s:Col('Cursor', 'base1', 'base6')
-call s:Col('CursorLine', '', 'green')
-call s:Col('CursorColumn', '', 'green')
+call s:Col('Cursor', 'base1', 'base1')
+call s:Col('CursorLine', '', 'base1')
+call s:Col('CursorColumn', '', 'base1')
 
 " Sign column, line numbers.
 call s:Col('LineNr', 'base4', s:linenr_background)
-call s:Col('CursorLineNr', 'base5', s:linenr_background)
+call s:Col('CursorLineNr', 'base6', s:linenr_background)
 call s:Col('SignColumn', '', s:linenr_background)
 call s:Col('ColorColumn', '', s:linenr_background)
 
@@ -116,49 +126,49 @@ call s:Col('Visual', '', 'base3')
 
 " Easy-to-guess code elements.
 call s:Col('Comment', 'base4')
-call s:Col('String', 'base6')
-call s:Col('Number', 'base5')
-call s:Col('Statement', 'orange')
+call s:Col('String', 'violet')
+call s:Col('Number', 'blue')
+call s:Col('Statement', 'red')
 call s:Col('Special', 'orange')
-call s:Col('Identifier', 'base5')
+call s:Col('Identifier', 'green')
 
 " Constants, Ruby symbols.
-call s:Col('Constant', 'magenta')
+call s:Col('Constant', 'base6')
 
 " Some HTML tags (<title>, some <h*>s)
-call s:Col('Title', 'orange')
+call s:Col('Title', 'base6')
 
 " <a> tags.
-call s:Col('Underlined', 'yellow')
+call s:Col('Underlined', 'base6')
 call s:Attr('Underlined', 'underline')
 
 " Types, HTML attributes, Ruby constants (and class names).
-call s:Col('Type', 'orange')
+call s:Col('Type', 'cyan')
 
 " Stuff like 'require' in Ruby.
-call s:Col('PreProc', 'red')
+call s:Col('PreProc', 'base6')
 
 " Tildes on the bottom of the page.
 call s:Col('NonText', 'base4')
 
 " Concealed stuff.
-call s:Col('Conceal', 'cyan', s:background)
+call s:Col('Conceal', 'base6', s:background)
 
 " TODO and similar tags.
-call s:Col('Todo', 'magenta', s:background)
+call s:Col('Todo', 'yellow', s:background)
 
 " The column separating vertical splits.
-call s:Col('VertSplit', 'base2', s:linenr_background)
-call s:Col('StatusLineNC', 'base4', 'base2')
+call s:Col('VertSplit', 'base6', s:linenr_background)
+call s:Col('StatusLineNC', 'base1', 'base2')
 
 " Matching parenthesis.
-call s:Col('MatchParen', 'base1', 'orange')
+call s:Col('MatchParen', 'base1', 'base6')
 
 " Special keys, e.g. some of the chars in 'listchars'. See ':h listchars'.
-call s:Col('SpecialKey', 'blue')
+call s:Col('SpecialKey', 'base6')
 
 " Folds.
-call s:Col('Folded', 'base6', 'blue')
+call s:Col('Folded', 'base6', 'base0')
 call s:Col('FoldColumn', 'base5', 'base3')
 
 " Searching.
@@ -172,16 +182,16 @@ call s:Col('PmenuSbar', '', 'base2')
 call s:Col('PmenuThumb', '', 'base4')
 
 " Command line stuff.
-call s:Col('ErrorMsg', 'red', 'base1')
+call s:Col('ErrorMsg', 'cyan', 'base0')
 call s:Col('ModeMsg', 'blue')
 
 " Wild menu.
 " StatusLine determines the color of the non-active entries in the wild menu.
-call s:Col('StatusLine', 'base5', 'base2')
-call s:Col('WildMenu', 'base7', 'cyan')
+call s:Col('StatusLine', 'base0', 'base2')
+call s:Col('WildMenu', 'cyan', 'base2')
 
 " The 'Hit ENTER to continue prompt'.
-call s:Col('Question', 'green')
+call s:Col('Question', 'cyan')
 
 " Tab line.
 call s:Col('TabLineSel', 'base7', 'base4')  " the selected tab
@@ -215,12 +225,12 @@ call s:Col('rubyDefine', 'blue')
 call s:Col('rubyStringDelimiter', 'green')
 
 " HTML (and often Markdown).
-call s:Col('htmlArg', 'blue')
-call s:Col('htmlItalic', 'magenta')
-call s:Col('htmlBold', 'cyan', '')
+call s:Col('htmlArg', 'base6')
+call s:Col('htmlItalic', 'base6')
+call s:Col('htmlBold', 'base6', '')
 
-" Python                                                                                                                   
-call s:Col('pythonStatement', 'blue')
+" Python
+call s:Col('pythonStatement', 'orange')
 
 
 " Plugin =======================================================================
