@@ -90,18 +90,21 @@ nnoremap <leader>o :execute "normal! o\ek"<cr>
 " Show registers
 nnoremap <leader>rg :registers<cr>
 " Change to file directory
-nnoremap <leader>cd :cd %:p:h
+nnoremap <leader>cd :cd %:p:h<cr>
 " Change current window to file directory
-nnoremap <leader>lcd :lcd %:p:h
+nnoremap <leader>lcd :lcd %:p:h<cr>
 " Print current directory
-nnoremap <leader>pwd :pwd
+nnoremap <leader>pwd :pwd<cr>
 " Run current file
-nnoremap <leader>rf :!%:p
+nnoremap <leader>rf :!%:p<cr>
 " Access the command line?
 nnoremap <leader>cl :!
-" Move word to the next line
-nnoremap <leader>wd :execute "normal! $bc$\e\rhpa\ek0"
-" Move word to the previous line
+" Move word to the next line (Could use refining)
+nnoremap <leader>wd :execute "normal! $b\"acE\e\r\"bc$\e\"apa \e\"bpk0"<cr>
+" Move word to the previous line (Could use refining)
+nnoremap <leader>wu :execute "normal! k\r\"acE\exk$a \e\"apj0"<cr>
+" Make a new visual split with the next buffer
+nnoremap <leader>vs :vertical botright sb<cr>
 
 " INSERT MAPS
 " Easier escape
