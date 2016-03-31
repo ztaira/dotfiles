@@ -34,6 +34,11 @@ set incsearch ignorecase smartcase
 set nocompatible
 " Mouse
 set mouse=a
+" Tabs
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set noexpandtab
 
 " ============================================================================
 " PLUGINS
@@ -68,9 +73,9 @@ nnoremap <leader>bc :bd<cr>
 " Next Window
 nnoremap <leader>nw <C-w><C-w>
 " Python Comment
-nnoremap <leader>pc :execute "normal! 0c$# \ep\r"<cr>
+nnoremap <leader>pc :execute "normal! k\rc$# \ep\r"<cr>
 " C Comment
-nnoremap <leader>cc :execute "normal! 0c$// \ep\r"<cr>
+nnoremap <leader>cc :execute "normal! k\rc$// \ep\r"<cr>
 " Easier colon
 nnoremap ; :
 " Save File
@@ -95,8 +100,8 @@ nnoremap <leader>cd :cd %:p:h<cr>
 nnoremap <leader>lcd :lcd %:p:h<cr>
 " Print current directory
 nnoremap <leader>pwd :pwd<cr>
-" Run current file
-nnoremap <leader>rf :!%:p<cr>
+" Run executable 
+nnoremap <leader>re :!./output
 " Access the command line?
 nnoremap <leader>cl :!
 " Move word to the next line (Could use refining)
@@ -105,6 +110,14 @@ nnoremap <leader>wd :execute "normal! $b\"acE\e\r\"bc$\e\"apa \e\"bpk0"<cr>
 nnoremap <leader>wu :execute "normal! k\r\"acE\exk$a \e\"apj0"<cr>
 " Make a new visual split with the next buffer
 nnoremap <leader>vs :vertical botright sb<cr>
+" Open New File
+nnoremap <leader>nf :vert new
+" Add Buffer
+nnoremap <leader>ab :badd
+" Compile File
+nnoremap <leader>cf :!gcc -o output %:t
+" Run Python File
+nnoremap <leader>rp
 
 " INSERT MAPS
 " Easier escape
