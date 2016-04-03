@@ -58,68 +58,80 @@ call plug#end()
 " ============================================================================
 let mapleader = ' '
 " NORMAL MAPS
+"
+" Plugin mappings - for making plugins easier
 " NerdTree
 nnoremap <leader>nt :NERDTreeToggle<cr>
-" Quit
-nnoremap <leader>q :wq<cr>
-" QuitQuit
-nnoremap <leader>qq :q!<cr>
-" Number-relativeNumber
-nnoremap <leader>nn :call NumberToggle()<cr>
-" VIm preferences
-nnoremap <leader>vi :vsplit $MYVIMRC<cr>
-" Buffer Close
-nnoremap <leader>bc :bd<cr>
-" Next Window
-nnoremap <leader>nw <C-w><C-w>
+
+" Text manipulation mappings - for manipulating text
 " Python Comment
 nnoremap <leader>pc :execute "normal! k\rc$# \ep\r"<cr>
 " C Comment
 nnoremap <leader>cc :execute "normal! k\rc$// \ep\r"<cr>
-" Easier colon
-nnoremap ; :
-" Save File
-nnoremap <leader>sf :w<cr>
-" Save to my vim folder
-nnoremap <leader>svim :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/Vim/vimrc 
-" Buffers
-nnoremap <leader>b :b
-" Show All Buffers
-nnoremap <leader>bf :buffers<cr>
 " Move Line Down
-nnoremap <leader>ld :execute "normal! 0\"ac$\ej0\"bc$\ek0\"bpj0\"ap0"<cr>
+nnoremap <leader>ld :call MoveLinesDown(1)<cr>
 " Move Line Up
-nnoremap <leader>lu :execute "normal! 0\"ac$\ek0\"bc$\ej0\"bpk0\"ap0"<cr>
+nnoremap <leader>lu :call MoveLinesUp(1)<cr>
+" Move 2 lines down
+nnoremap <leader>2ld :call MoveLinesDown(2)<cr>
+" Move 2 lines up
+nnoremap <leader>2lu :call MoveLinesUp(2)<cr>
 " Insert newline above
 nnoremap <leader>O :execute "normal! O\ej"<cr>
 " Insert newline below
 nnoremap <leader>o :execute "normal! o\ek"<cr>
-" Show registers
-nnoremap <leader>rg :registers<cr>
-" Change to file directory
-nnoremap <leader>cd :cd %:p:h<cr>
-" Change current window to file directory
-nnoremap <leader>lcd :lcd %:p:h<cr>
-" Print current directory
-nnoremap <leader>pwd :pwd<cr>
-" Run executable 
-nnoremap <leader>re :!./output
-" Access the command line?
-nnoremap <leader>cl :!
 " Move word to the next line (Could use refining)
 nnoremap <leader>wd :execute "normal! $b\"acE\e\r\"bc$\e\"apa \e\"bpk0"<cr>
 " Move word to the previous line (Could use refining)
 nnoremap <leader>wu :execute "normal! k\r\"acE\exk$a \e\"apj0"<cr>
-" Make a new visual split with the next buffer
-nnoremap <leader>vs :vertical botright sb<cr>
+
+" File Manipulation mappings 
+" (for opening, closing, saving, compiling, and running files) 
 " Open New File
 nnoremap <leader>nf :vert new file.txt
+" Save File
+nnoremap <leader>sf :w<cr>
+" Quit and write to file
+nnoremap <leader>q :wq<cr>
+" Quit but don't write to file
+nnoremap <leader>qq :q!<cr>
+" Print current directory
+nnoremap <leader>pwd :pwd<cr>
+" Change to file directory
+nnoremap <leader>cd :cd %:p:h<cr>
+" Change current window to file directory
+nnoremap <leader>lcd :lcd %:p:h<cr>
+" Compile C File
+nnoremap <leader>cf :!gcc -o output %:t
+" Run executable 
+nnoremap <leader>re :!./output
+" Run Python File
+nnoremap <leader>rp :!python %:p<cr>
+" Show All Buffers
+nnoremap <leader>bf :buffers<cr>
 " Add Buffer
 nnoremap <leader>ab :badd
-" Compile File
-nnoremap <leader>cf :!gcc -o output %:t
-" Run Python File
-nnoremap <leader>rp :!python %:p
+" Buffer Close
+nnoremap <leader>bc :bd<cr>
+" Save to my vim folder
+nnoremap <leader>svim :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/Vim/%:t<cr>
+" Show registers
+nnoremap <leader>rg :registers<cr>
+
+" Vim Mappings
+" (mappings that help alter the current vim session)
+" Number-relativeNumber
+nnoremap <leader>nn :call NumberToggle()<cr>
+" VIm preferences
+nnoremap <leader>vi :vsplit $MYVIMRC<cr>
+" Next Window
+nnoremap <leader>nw <C-w><C-w>
+" Easier colon
+nnoremap ; :
+" Access the command line?
+nnoremap <leader>cl :!
+" Make a new visual split with the next buffer
+nnoremap <leader>vs :vertical botright sb<cr>
 
 " INSERT MAPS
 " Easier escape
@@ -141,5 +153,12 @@ function! NumberToggle()
 	endif
 endfunction
 
-function! MoveLine(lines)
+" Function to move a variable amount of lines down
+function! MoveLinesDown(lines)
+	execute "normal! \"a" . a:lines . "dddd\"aPPj" 
+endfunction
+
+" Function to move a variable amount of lines up
+function! MoveLinesUp(lines)
+	execute "normal! \"a" . a:lines . "ddkP"
 endfunction
