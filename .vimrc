@@ -80,6 +80,8 @@ nnoremap <leader>cc :execute "normal! k\rc$// \ep\r"<cr>
 nnoremap ; :
 " Save File
 nnoremap <leader>sf :w<cr>
+" Save to my vim folder
+nnoremap <leader>svim :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/Vim/vimrc 
 " Buffers
 nnoremap <leader>b :b
 " Show All Buffers
@@ -111,13 +113,13 @@ nnoremap <leader>wu :execute "normal! k\r\"acE\exk$a \e\"apj0"<cr>
 " Make a new visual split with the next buffer
 nnoremap <leader>vs :vertical botright sb<cr>
 " Open New File
-nnoremap <leader>nf :vert new
+nnoremap <leader>nf :vert new file.txt
 " Add Buffer
 nnoremap <leader>ab :badd
 " Compile File
 nnoremap <leader>cf :!gcc -o output %:t
 " Run Python File
-nnoremap <leader>rp
+nnoremap <leader>rp :!python %:p
 
 " INSERT MAPS
 " Easier escape
@@ -139,3 +141,5 @@ function! NumberToggle()
 	endif
 endfunction
 
+function! MoveLine(lines)
+endfunction
