@@ -133,13 +133,13 @@ nnoremap <leader>cl :!
 " Make a new visual split with the next buffer
 nnoremap <leader>vs :vertical botright sb<cr>
 
-" INSERT MAPS
-" Easier escape
-inoremap ueht <esc>
-
 " VISUAL MAPS
-" Easier escape
-vnoremap ueht <esc> 
+" Move variable amount of lines down and reselect in visual mode
+vnoremap <leader>ld : <bar> call VMoveLinesDown()<cr><cr>
+" Move variable amount of lines up and reselect in visual mode
+vnoremap <leader>lu : <bar> call VMoveLinesUp()<cr><cr>
+
+" INSERT MAPS
 
 " ============================================================================
 " USEFUL FUNCTIONS
@@ -153,12 +153,26 @@ function! NumberToggle()
 	endif
 endfunction
 
-" Function to move a variable amount of lines down
+" Function to move a variable amount of lines down 1 line
 function! MoveLinesDown(lines)
 	execute "normal! \"a" . a:lines . "dddd\"aPPj" 
 endfunction
 
-" Function to move a variable amount of lines up
+" Function to move a variable amount of lines up 1 line
 function! MoveLinesUp(lines)
 	execute "normal! \"a" . a:lines . "ddkP"
+endfunction
+
+" Function to move multiple lines down in visual mode
+function! VMoveLinesDown()
+	let front = line("'<")
+	let back = line("'>")
+	execute "normal! " . back . "Gjdd" . front . "GPgv"
+endfunction
+
+" Function to move multiple lines up in visual mode
+function! VMoveLinesUp()
+	let front = line("'<")
+	let back = line("'>")
+	execute "normal! " . front . "Gkdd" . back . "GPgv"
 endfunction
