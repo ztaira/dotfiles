@@ -38,7 +38,7 @@ set mouse=a
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set noexpandtab
+set expandtab
 
 " ============================================================================
 " PLUGINS
@@ -132,6 +132,10 @@ nnoremap ; :
 nnoremap <leader>cl :!
 " Make a new visual split with the next buffer
 nnoremap <leader>vs :vertical botright sb<cr>
+" Display invisible characters
+nnoremap <leader>li :set list! listchars=eol:$,tab:\<bar>\<space>,trail:~
+" Set expandtab
+nnoremap <leader>et :set expandtab!
 
 " VISUAL MAPS
 " Move variable amount of lines down and reselect in visual mode
