@@ -110,7 +110,7 @@ nnoremap <leader>rp :!python %:p<cr>
 " Show All Buffers
 nnoremap <leader>bf :buffers<cr>
 " Add Buffer
-nnoremap <leader>ab :badd
+nnoremap <leader>ba :badd
 " Buffer Close
 nnoremap <leader>bc :bd<cr>
 " Save to my vim folder
@@ -142,6 +142,9 @@ nnoremap <leader>et :set expandtab!
 vnoremap <leader>ld : <bar> call VMoveLinesDown()<cr><cr>
 " Move variable amount of lines up and reselect in visual mode
 vnoremap <leader>lu : <bar> call VMoveLinesUp()<cr><cr>
+
+" INSERT MAPS
+" (none)
 
 " ============================================================================
 " USEFUL FUNCTIONS
