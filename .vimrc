@@ -65,9 +65,9 @@ nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " Text manipulation mappings - for manipulating text
 " Python Comment
-nnoremap <leader>pc :execute "normal! k\rc$# \ep\r"<cr>
+nnoremap <leader>pc :execute "normal! ^c$# \ep\r"<cr>
 " C Comment
-nnoremap <leader>cc :execute "normal! k\rc$// \ep\r"<cr>
+nnoremap <leader>cc :execute "normal! ^c$// \ep\r"<cr>
 " Move Line Down
 nnoremap <leader>ld :call MoveLinesDown(1)<cr>
 " Move Line Up
