@@ -39,6 +39,9 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+" Status Line
+set laststatus=2
+set statusline=%-15.F\ %-15.([b%n]%y%m%)[%l,\ %c]
 
 " ============================================================================
 " PLUGINS
