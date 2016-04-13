@@ -41,7 +41,7 @@ set softtabstop=4
 set expandtab
 " Status Line
 set laststatus=2
-set statusline=%-15.20F\ %-15.([b%n]%y%m%)[%l,\ %c]
+set statusline=%-20.20F%-20.20([b%n]%y%m%)%-20.20([%l,\ %c]%)
 " Set wrap settings
 set nowrap
 
