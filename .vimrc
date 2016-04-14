@@ -102,10 +102,8 @@ nnoremap <leader>q :wq<cr>
 nnoremap <leader>qq :q!<cr>
 " Print current directory
 nnoremap <leader>pwd :pwd<cr>
-" Change to file directory
-nnoremap <leader>cd :cd %:p:h<cr>
 " Change current window to file directory
-nnoremap <leader>lcd :lcd %:p:h<cr>
+nnoremap <leader>cd :lcd %:p:h<cr>
 " Compile C File
 nnoremap <leader>cf :!gcc -o output %:t
 " Run executable 
@@ -156,9 +154,6 @@ nnoremap <leader>gitd :!git diff
 vnoremap <leader>ld : <bar> call VMoveLinesDown()<cr><cr>
 " Move variable amount of lines up and reselect in visual mode
 vnoremap <leader>lu : <bar> call VMoveLinesUp()<cr><cr>
-
-" INSERT MAPS
-" (none)
 
 " ============================================================================
 " USEFUL FUNCTIONS
