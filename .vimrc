@@ -44,6 +44,9 @@ set laststatus=2
 set statusline=%-20.20F%-20.20([b%n]%y%m%)%-20.20([%l,\ %c]%)
 " Wrap
 set nowrap
+" Automatically open start.txt in a new window
+" autocmd VimEnter * :badd ~/start.txt
+" autocmd VimEnter * :vertical belowright sb start.txt
 
 " ============================================================================
 " PLUGINS
