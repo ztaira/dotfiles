@@ -142,6 +142,15 @@ nnoremap <leader>li :set list! listchars=eol:$,tab:\<bar>\<space>,trail:~
 " Set expandtab
 nnoremap <leader>et :set expandtab!
 
+" Git Mappings
+" (mappings that help with version control)
+" Git Commit
+nnoremap <leader>gitc :!git commit -a
+" Git Push
+nnoremap <leader>gitp :!git push
+" Git Diff
+nnoremap <leader>gitd :!git diff
+
 " VISUAL MAPS
 " Move variable amount of lines down and reselect in visual mode
 vnoremap <leader>ld : <bar> call VMoveLinesDown()<cr><cr>
