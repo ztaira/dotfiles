@@ -41,7 +41,8 @@ set softtabstop=4
 set expandtab
 " Status Line
 set laststatus=2
-set statusline=%-20.20F%-20.20([b%n]%y%m%)%-20.20([%l,\ %c]%)
+set statusline=%-20.20F%-20.20([b%n]%y%m%)%-20.20([%l,\ %c]%)%=
+            \ %!GetCurrentSong()
 " Wrap
 set nowrap
 " Automatically open start.txt in a new window
@@ -192,4 +193,11 @@ function! VMoveLinesUp()
 	let front = line("'<")
 	let back = line("'>")
 	execute "normal! " . front . "Gkdd" . back . "GPgv"
+endfunction
+
+" Function to get the current song playing on Spotify
+function! GetCurrentSong()
+    let song=system("osascript -e 'tell application \"Spotify\" to artist of 
+                \ current track as string'")
+    return song
 endfunction
