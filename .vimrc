@@ -40,21 +40,20 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 " Status Line
+" Continuous update of current song makes vim laggy
+" Therefore, that's only done on save
 set laststatus=2
 set statusline=
-            " Path to file
             \%-20.20F
-            " Buffer, File Type, Modified?
             \%-20.20([b%n]%y%m%)
-            " Line, Column
             \%-20.20([%l,\ %c]%)
-            "\%{GetCurrentSong()}
+autocmd BufWritePost * :call UpdateStatusline()
 " Wrap
 set nowrap
 " Automatically open start.txt in a new window
 " autocmd VimEnter * :badd ~/start.txt
 " autocmd VimEnter * :vertical belowright sb start.txt
-
+"
 " ============================================================================
 " PLUGINS
 " ============================================================================
@@ -201,9 +200,39 @@ function! VMoveLinesUp()
 	execute "normal! " . front . "Gkdd" . back . "GPgv"
 endfunction
 
-" Function to get the current song playing on Spotify
+" Function to get current song playing on Spotify
 function! GetCurrentSong()
-    let song=system("osascript -e 'tell application \"Spotify\" to artist of 
-                \ current track as string'")
-    return song
+    " Get the current song title and trim the \n
+    let l:cname=system("osascript -e 'tell Application \"System Events\"\n
+                \ if application process \"Spotify\" exists then\n
+                \ tell application \"Spotify\" to name of 
+                \ current track as string\n
+                \ end if\n
+                \ end tell'")
+    let l:cname = l:cname[:-2] 
+    " Get the current song's artist and trim the \n
+    let l:cartist=system("osascript -e 'tell Application \"System Events\"\n
+                \ if application process \"Spotify\" exists then\n
+                \ tell application \"Spotify\" to artist of 
+                \ current track as string\n
+                \ end if\n
+                \ end tell'")
+    let l:cartist = l:cartist[:-2]
+    " If there's no song, string=None. Else, string=Name-Artist
+    if strlen(l:cname)==?0
+        let l:cname="None"
+    else
+        let l:cname=l:cname . "-" . l:cartist
+    endif
+    return l:cname
+endfunction
+
+" function to update statusline
+function! UpdateStatusline()
+    let g:song=GetCurrentSong()
+    set statusline=
+                \%-20.20F
+                \%-20.20([b%n]%y%m%)
+                \%-20.20([%l,\ %c]%)
+                \%{g:song}
 endfunction
