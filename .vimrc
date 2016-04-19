@@ -41,8 +41,14 @@ set softtabstop=4
 set expandtab
 " Status Line
 set laststatus=2
-set statusline=%-20.20F%-20.20([b%n]%y%m%)%-20.20([%l,\ %c]%)%=
-            \ %!GetCurrentSong()
+set statusline=
+            " Path to file
+            \%-20.20F
+            " Buffer, File Type, Modified?
+            \%-20.20([b%n]%y%m%)
+            " Line, Column
+            \%-20.20([%l,\ %c]%)
+            "\%{GetCurrentSong()}
 " Wrap
 set nowrap
 " Automatically open start.txt in a new window
