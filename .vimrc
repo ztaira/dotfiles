@@ -164,6 +164,11 @@ vnoremap <leader>ld : <bar> call VMoveLinesDown()<cr><cr>
 " Move variable amount of lines up and reselect in visual mode
 vnoremap <leader>lu : <bar> call VMoveLinesUp()<cr><cr>
 
+" INSERT MAPS
+" Make exiting insert mode easier and less strenuous
+inoremap ii <Esc>
+inoremap <Esc> don't press that key
+
 " ============================================================================
 " USEFUL FUNCTIONS
 " ============================================================================
