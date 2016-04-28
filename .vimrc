@@ -168,6 +168,8 @@ vnoremap <leader>lu : <bar> call VMoveLinesUp()<cr><cr>
 " Make exiting insert mode easier and less strenuous
 inoremap ii <Esc>
 inoremap <Esc> don't press that key
+" Add the ability to save from inside insert mode
+inoremap <leader>sf <Esc>:w<cr>l
 
 " ============================================================================
 " USEFUL FUNCTIONS
