@@ -246,7 +246,3 @@ function! UpdateStatusline()
                 \%{g:song}
 endfunction
 
-" function to find mappings and write them to a file
-function! MapMappings()
-    execute "g/noremap/ . w >> mappings.txt"
-endfunction
