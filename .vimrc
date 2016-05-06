@@ -245,3 +245,8 @@ function! UpdateStatusline()
                 \%-20.20([%l,\ %c]%)
                 \%{g:song}
 endfunction
+
+" function to find mappings and write them to a file
+function! MapMappings()
+    echo hello
+endfunction
