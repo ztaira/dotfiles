@@ -98,6 +98,8 @@ nnoremap <leader>o :execute "normal! o\ek"<cr>
 nnoremap <leader>wd :execute "normal! $b\"acE\e\r\"bc$\e\"apa \e\"bpk0"<cr>
 " Move word to the previous line (Could use refining)
 nnoremap <leader>wu :execute "normal! k\r\"acE\exk$a \e\"apj0"<cr>
+" Copy line to clipboard
+nnoremap <C-c> :.!pbcopy
 
 " File Manipulation mappings 
 " (for opening, closing, saving, compiling, and running files) 
