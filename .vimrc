@@ -248,5 +248,5 @@ endfunction
 
 " function to find mappings and write them to a file
 function! MapMappings()
-    echo hello
+    execute "g/noremap/ . w >> mappings.txt"
 endfunction
