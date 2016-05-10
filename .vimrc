@@ -91,7 +91,7 @@ nnoremap <leader>2ld :call MoveLinesDown(2)<cr>
 " Move 2 lines up
 nnoremap <leader>2lu :call MoveLinesUp(2)<cr>
 " Insert newline above
-nnoremap <leader>O :execute "normal! O\ej"<cr>
+nnoremap <leader>O :execute "normal! O\e"<cr>
 " Insert newline below
 nnoremap <leader>o :execute "normal! o\ek"<cr>
 " Move word to the next line (Could use refining)
@@ -131,6 +131,10 @@ nnoremap <leader>bc :bd<cr>
 nnoremap <leader>svim :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/Vim/%:t<cr>
 " Show registers
 nnoremap <leader>rg :registers<cr>
+" Run through pylint
+nnoremap <leader>pl :!pylint %:t<cr>
+" Run through pep8
+nnoremap <leader>p8 :!pep8 %:t<cr>
 
 " Vim Mappings
 " (mappings that help alter the current vim session)
@@ -154,11 +158,13 @@ nnoremap <leader>et :set expandtab!
 " Git Mappings
 " (mappings that help with version control)
 " Git Commit
-nnoremap <leader>gitc :!git commit -a
+nnoremap <leader>gc :!git commit -m
 " Git Push
-nnoremap <leader>gitp :!git push
+nnoremap <leader>gp :!git push
 " Git Diff
-nnoremap <leader>gitd :!git diff
+nnoremap <leader>gd :!git diff
+" Git Add
+nnoremap <leader>ga :!git add
 
 " VISUAL MAPS
 " Move variable amount of lines down and reselect in visual mode
