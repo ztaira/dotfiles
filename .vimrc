@@ -127,6 +127,10 @@ nnoremap <leader>bf :buffers<cr>
 nnoremap <leader>ba :badd
 " Buffer Close
 nnoremap <leader>bc :bd<cr>
+" Next Buffer
+nnoremap <leader>bn :bnext<cr>
+" Previous Buffer
+nnoremap <leader>nb :bprevious<cr>
 " Save to my vim folder
 nnoremap <leader>svim :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/Vim/%:t<cr>
 " Show registers
@@ -149,7 +153,7 @@ nnoremap ; :
 " Access the command line?
 nnoremap <leader>cl :!
 " Make a new visual split with the next buffer
-nnoremap <leader>vs :vertical botright sb<cr>
+nnoremap <leader>vs :vertical botright sbn<cr>
 " Display invisible characters
 nnoremap <leader>li :set list! listchars=eol:$,tab:\<bar>\<space>,trail:~
 " Set expandtab
@@ -249,6 +253,6 @@ function! UpdateStatusline()
                 \%-20.20F
                 \%-20.20([b%n]%y%m%)
                 \%-20.20([%l,\ %c]%)
-                \%{g:song}
+                \%-20.20{g:song}
 endfunction
 
