@@ -21,6 +21,7 @@
 " DEFAULT SETTINGS
 " ============================================================================
 " Color scheme
+set t_Co=256
 colo zachscheme
 syntax on
 " Set the cursor lines to be on
@@ -59,12 +60,12 @@ set nowrap
 " ============================================================================
 " plugins - call :source % then :PlugInstall to update
 call plug#begin('~/.vim/plugged')
-	" file directory plugin
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-	" plugin for managing brackets
-	Plug 'tpope/vim-surround'
-	" plugin for spacing
-	Plug 'godlygeek/tabular'
+    " file directory plugin
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+    " plugin for managing brackets
+    Plug 'tpope/vim-surround'
+    " plugin for spacing
+    Plug 'godlygeek/tabular'
 call plug#end()
 
 " ============================================================================
@@ -188,35 +189,35 @@ inoremap <leader>sf <Esc>:w<cr>l
 " ============================================================================
 " function to toggle :set number and :set relativenumber
 function! NumberToggle()
-	if &number
-		set relativenumber
-	else
-		set number
-	endif
+    if &number
+        set relativenumber
+    else
+        set number
+    endif
 endfunction
 
 " Function to move a variable amount of lines down 1 line
 function! MoveLinesDown(lines)
-	execute "normal! \"a" . a:lines . "dddd\"aPPj" 
+    execute "normal! \"a" . a:lines . "dddd\"aPPj" 
 endfunction
 
 " Function to move a variable amount of lines up 1 line
 function! MoveLinesUp(lines)
-	execute "normal! \"a" . a:lines . "ddkP"
+    execute "normal! \"a" . a:lines . "ddkP"
 endfunction
 
 " Function to move multiple lines down in visual mode
 function! VMoveLinesDown()
-	let front = line("'<")
-	let back = line("'>")
-	execute "normal! " . back . "Gjdd" . front . "GPgv"
+    let front = line("'<")
+    let back = line("'>")
+    execute "normal! " . back . "Gjdd" . front . "GPgv"
 endfunction
 
 " Function to move multiple lines up in visual mode
 function! VMoveLinesUp()
-	let front = line("'<")
-	let back = line("'>")
-	execute "normal! " . front . "Gkdd" . back . "GPgv"
+    let front = line("'<")
+    let back = line("'>")
+    execute "normal! " . front . "Gkdd" . back . "GPgv"
 endfunction
 
 " Function to get current song playing on Spotify
