@@ -1,9 +1,33 @@
 #!/bin/bash
 
 # ============================================================================
-# Customization Settings
+# Environment Settings
 # ============================================================================
 alias ls='ls -Gh'
+
+# ============================================================================
+# Bookmark Functions
+# ============================================================================
+# Add Bookmark
+wzadd () {
+    full_path=$PWD
+    echo $1 ${full_path/$HOME/\~} >> ~/.NERDTreeBookmarks
+}
+
+# List Bookmarks
+wzprint () {
+    cat ~/.NERDTreeBookmarks
+}
+
+# Go to Bookmark
+wz () {
+    pwd
+    wz_destination=$(grep "$1 ~" ~/.NERDTreeBookmarks)
+    final_destination=${wz_destination/$1 \~/\~}
+    echo $final_destination
+    cd $final_destination
+    pwd
+}
 
 # ============================================================================
 # tmux
