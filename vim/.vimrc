@@ -61,19 +61,19 @@ set nowrap
 " PLUGINS
 " ============================================================================
 " plugins - call :source % then :PlugInstall to update
-call plug#begin('~/.vim/plugged')
+call plug#begin("~/.vim/plugged")
     " file directory plugin
-    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug "scrooloose/nerdtree", { "on": "NERDTreeToggle" }
     " plugin for managing brackets
-    Plug 'tpope/vim-surround'
+    Plug "tpope/vim-surround"
     " plugin for spacing
-    Plug 'godlygeek/tabular'
+    Plug "godlygeek/tabular"
 call plug#end()
 
 " ============================================================================
 " MAPPINGS - normal maps, insert maps, and visual maps
 " ============================================================================
-let mapleader = ' '
+let mapleader = " "
 " NORMAL MAPS
 "
 " Plugin mappings - for making plugins easier
