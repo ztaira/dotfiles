@@ -134,14 +134,16 @@ nnoremap <leader>bc :bd<cr>
 nnoremap <leader>bn :bnext<cr>
 " Previous Buffer
 nnoremap <leader>nb :bprevious<cr>
-" Save to my vim folder
-nnoremap <leader>svim :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/Vim/%:t<cr>
 " Show registers
 nnoremap <leader>rg :registers<cr>
 " Run through pylint
 nnoremap <leader>pl :!pylint %:t<cr>
 " Run through pep8
 nnoremap <leader>p8 :!pep8 %:t<cr>
+" Save to my vim folder
+nnoremap <leader>svim :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/Dotfiles/vim/%:t<cr>
+" Save to my bash folder
+nnoremap <leader>sbash :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/Dotfiles/bash/%:t<cr>
 
 " Vim Mappings
 " (mappings that help alter the current vim session)
