@@ -1,6 +1,7 @@
 " Vim color file
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last Change:	2001 Jul 23
+" Maintainer:	Zach Taira
+" Last Change:	5/16/2016
+" Modified color scheme - original by Bram Moolenaar <Bram@vim.org>
 
 " This is the default color scheme.  It doesn't define the Normal
 " highlighting, it uses whatever the colors used to be.
@@ -172,7 +173,7 @@ call s:Col('PmenuSbar', '', 'base2')
 call s:Col('PmenuThumb', '', 'base4')
 
 " Command line stuff.
-call s:Col('ErrorMsg', 'red', 'base1')
+call s:Col('ErrorMsg', 'red', 'green')
 call s:Col('ModeMsg', 'blue')
 
 " Wild menu.
