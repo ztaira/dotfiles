@@ -20,7 +20,7 @@ whiz () {
     if [ "$1" != "" ]; then
         bookmark_line=$(grep "$1 " ~/.NERDTreeBookmarks)
         final_destination=${bookmark_line/$1 \~//Users/zacharytaira}
-        echo "Changing directory to $final_destination"
+        echo "Whizzing to $final_destination"
         cd $final_destination
     else
         echo ""
