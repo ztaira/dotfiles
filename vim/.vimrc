@@ -68,6 +68,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround'
     " plugin for spacing
     Plug 'godlygeek/tabular'
+    " plugin for gitgutter
+    Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " ============================================================================
