@@ -182,7 +182,7 @@ call s:Col('StatusLine', 'base5', 'base2')
 call s:Col('WildMenu', 'base7', 'cyan')
 
 " The 'Hit ENTER to continue prompt'.
-call s:Col('Question', 'green')
+call s:Col('Question', 'base6')
 
 " Tab line.
 call s:Col('TabLineSel', 'base7', 'base4')  " the selected tab
