@@ -143,9 +143,9 @@ nnoremap <leader>pl :!pylint %:t<cr>
 " Run through pep8
 nnoremap <leader>p8 :!pep8 %:t<cr>
 " Save to my vim folder
-nnoremap <leader>svim :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/dotfiles/vim/%:t<cr>
+nnoremap <leader>svim :w! /Users/ztiara/Desktop/ResilientIBM/Code/dotfiles/vim/%:t<cr>
 " Save to my bash folder
-nnoremap <leader>sbash :w! /Users/zacharytaira/Desktop/10.4.15/School/2016S/dotfiles/bash/%:t<cr>
+nnoremap <leader>sbash :w! /Users/ztiara/Desktop/ResilientIBM/Code/dotfiles/bash/%:t<cr>
 
 " Vim Mappings
 " (mappings that help alter the current vim session)
