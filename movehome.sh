@@ -1,3 +1,4 @@
+
 cp bash/.bashrc ~/
 cp vim/.vimrc ~/
 cp vim/start.txt ~/
