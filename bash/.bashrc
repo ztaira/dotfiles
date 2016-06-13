@@ -1,5 +1,4 @@
 #!/bin/bash
-# note: ibm version
 
 # ============================================================================
 # Environment Settings
@@ -20,7 +19,8 @@ whizadd () {
 whiz () {
     if [ "$1" != "" ]; then
         bookmark_line=$(grep "$1 " ~/.NERDTreeBookmarks)
-        final_destination=${bookmark_line/$1 \~//Users/ztiara}
+        destination=${bookmark_line/$1 \~//Users/ztiara}
+        final_destination=${destination/$1 /}
         echo "Whizzing to $final_destination"
         cd $final_destination
     else
@@ -46,6 +46,29 @@ nyan () {
 }
 
 # ============================================================================
+# Code Snip Function - frag (frag, as in "only use the fragments you want")
+# ============================================================================
+frag () {
+    filename="$1"
+    echo '' > frag.txt
+    if [ "$2" != "" ]; then
+        for arg in "$@"
+        do
+            if [ "$arg" != "$1" ]; then
+                first_number=$(echo $arg | sed -e 's/\.\..*//')
+                second_number=$(echo $arg | sed -e 's/.*\.\.//')
+                for line in `seq $first_number $second_number`
+                do
+                    sed "${line}q;d" $filename >> frag.txt
+                done
+            fi
+        done
+    else
+        cat -n $1
+    fi
+}
+
+# ============================================================================
 # tmux
 # ============================================================================
 # sessions
@@ -59,6 +82,14 @@ lsessions () {
 
 nsession () {
     tmux new -s $1
+}
+
+asession () {
+    tmux attach-session -t $1
+}
+
+detach () {
+    tmux detach
 }
 
 # panes
