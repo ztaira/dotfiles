@@ -477,7 +477,7 @@ function! QwertyLetter()
     endif
 endfunction 
 
-" Convent letter to dvorak
+" Convert letter to dvorak
 function! DvorakLetter()
     let l:currentcharacter=matchstr(getline('.'), '\%' . col('.') . 'c.')
     if l:currentcharacter==#"-"
