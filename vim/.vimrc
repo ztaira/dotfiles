@@ -57,6 +57,9 @@ set nowrap
 " Automatically open start.txt in a new window
 " autocmd VimEnter * :badd ~/start.txt
 " autocmd VimEnter * :vertical belowright sb start.txt
+set noswapfile
+set cryptmethod=blowfish
+set nobackup
 "
 " ============================================================================
 " PLUGINS
@@ -85,9 +88,9 @@ nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " Text manipulation mappings - for manipulating text
 " Python Comment
-nnoremap <leader>pc :execute "normal! ^c$# \ep\r"<cr>
+nnoremap <leader>pc :call EasyLineComment('# ')<cr>
 " C Comment
-nnoremap <leader>cc :execute "normal! ^c$// \ep\r"<cr>
+nnoremap <leader>cc :call EasyLineComment('//')<cr>
 " Move Line Down
 nnoremap <leader>ld :call MoveLinesDown(1)<cr>
 " Move Line Up
@@ -104,8 +107,6 @@ nnoremap <leader>o :execute "normal! o\ek"<cr>
 nnoremap <leader>wd :execute "normal! $b\"acE\e\r\"bc$\e\"apa \e\"bpk0"<cr>
 " Move word to the previous line (Could use refining)
 nnoremap <leader>wu :execute "normal! k\r\"acE\exk$a \e\"apj0"<cr>
-" Copy line to clipboard
-nnoremap <C-c> :.!pbcopy
 
 " File Manipulation mappings 
 " (for opening, closing, saving, compiling, and running files) 
@@ -264,3 +265,365 @@ function! UpdateStatusline()
                 \%-20.20{g:song}
 endfunction
 
+" function to do or undo python or c comments
+function! EasyLineComment(...)
+    execute "normal! ^"
+    let l:commentsymbol=matchstr(getline('.'), '\%' . col('.') . 'c.')
+    execute "normal! l"
+    let l:commentsymbol2=matchstr(getline('.'), '\%' . col('.') . 'c.')
+    let l:indicator=l:commentsymbol . l:commentsymbol2
+    if l:indicator ==? a:1
+        execute "normal! ^dw"
+    elseif a:1 ==? "# "
+        execute "normal! ^i# \e"
+    elseif a:1 ==? "//"
+        execute "normal! ^i// \e"
+    endif
+endfunction
+
+" returns the line number of the given mark
+function! GetMarkLine(...)
+    let l:filter="cat ~/.viminfo |
+                \ grep \"\\\'" . a:1 . " \\d* \\d* .*\" |
+                \ sed -E \"s/\\\'" . a:1 . "  ([0-9]+)  ([0-9]+).*/\\1/\"" 
+    let l:linenumber=system(l:filter)
+    return l:linenumber
+endfunction
+
+" returns the column number of the given mark
+function! GetMarkColumn(...)
+    let l:filter="cat ~/.viminfo |
+                \ grep \"\\\'" . a:1 . " \\d* \\d* .*\" |
+                \ sed -E \"s/\\\'" . a:1 . "  ([0-9]+)  ([0-9]+).*/\\2/\"" 
+    let l:linecolumn=system(l:filter)
+    return l:linecolumn
+endfunction
+
+" Convert line to qwerty
+function! QwertyLine()
+    execute "normal! $mA^mB"
+    execute "wv"
+    let l:apos=GetMarkColumn('A')
+    let l:bpos=GetMarkColumn('B')
+    call QwertyLetter()
+    while l:bpos<l:apos
+        execute "normal! lmB"
+        call QwertyLetter()
+        let l:bpos=l:bpos+1
+    endwhile
+endfunction
+
+" Convert line to dvorak
+function! DvorakLine()
+    execute "normal! $mA^mB"
+    execute "wv"
+    let l:apos=GetMarkColumn('A')
+    let l:bpos=GetMarkColumn('B')
+    call DvorakLetter()
+    while l:bpos<l:apos
+        execute "normal! lmB"
+        call DvorakLetter()
+        let l:bpos=l:bpos+1
+    endwhile
+endfunction
+
+" Convert letter to qwerty
+function! QwertyLetter()
+    let l:currentcharacter=matchstr(getline('.'), '\%' . col('.') . 'c.')
+    if l:currentcharacter==#"["
+        execute "normal! s-\e"
+    elseif l:currentcharacter==#"{"
+        execute "normal! s_\e"
+    elseif l:currentcharacter==#"]"
+        execute "normal! s=\e"
+    elseif l:currentcharacter==#"}"
+        execute "normal! s+\e"
+    elseif l:currentcharacter==#"'"
+        execute "normal! sq\e"
+    elseif l:currentcharacter==#"\""
+        execute "normal! sQ\e"
+    elseif l:currentcharacter==#","
+        execute "normal! sw\e"
+    elseif l:currentcharacter==#"<"
+        execute "normal! sW\e"
+    elseif l:currentcharacter==#"."
+        execute "normal! se\e"
+    elseif l:currentcharacter==#">"
+        execute "normal! sE\e"
+    elseif l:currentcharacter==#"p"
+        execute "normal! sr\e"
+    elseif l:currentcharacter==#"P"
+        execute "normal! sR\e"
+    elseif l:currentcharacter==#"y"
+        execute "normal! st\e"
+    elseif l:currentcharacter==#"Y"
+        execute "normal! sT\e"
+    elseif l:currentcharacter==#"f"
+        execute "normal! sy\e"
+    elseif l:currentcharacter==#"F"
+        execute "normal! sY\e"
+    elseif l:currentcharacter==#"g"
+        execute "normal! su\e"
+    elseif l:currentcharacter==#"G"
+        execute "normal! sU\e"
+    elseif l:currentcharacter==#"c"
+        execute "normal! si\e"
+    elseif l:currentcharacter==#"C"
+        execute "normal! sI\e"
+    elseif l:currentcharacter==#"r"
+        execute "normal! so\e"
+    elseif l:currentcharacter==#"R"
+        execute "normal! sO\e"
+    elseif l:currentcharacter==#"l"
+        execute "normal! sp\e"
+    elseif l:currentcharacter==#"L"
+        execute "normal! sP\e"
+    elseif l:currentcharacter==#"/"
+        execute "normal! s[\e"
+    elseif l:currentcharacter==#"?"
+        execute "normal! s{\e"
+    elseif l:currentcharacter==#"="
+        execute "normal! s]\e"
+    elseif l:currentcharacter==#"+"
+        execute "normal! s}\e"
+    elseif l:currentcharacter==#"\\"
+        execute "normal! s\\\e"
+    elseif l:currentcharacter==#"|"
+        execute "normal! s|\e"
+    elseif l:currentcharacter==#"a"
+        execute "normal! sa\e"
+    elseif l:currentcharacter==#"A"
+        execute "normal! sA\e"
+    elseif l:currentcharacter==#"o"
+        execute "normal! ss\e"
+    elseif l:currentcharacter==#"O"
+        execute "normal! sS\e"
+    elseif l:currentcharacter==#"e"
+        execute "normal! sd\e"
+    elseif l:currentcharacter==#"E"
+        execute "normal! sD\e"
+    elseif l:currentcharacter==#"u"
+        execute "normal! sf\e"
+    elseif l:currentcharacter==#"U"
+        execute "normal! sF\e"
+    elseif l:currentcharacter==#"i"
+        execute "normal! sg\e"
+    elseif l:currentcharacter==#"I"
+        execute "normal! sG\e"
+    elseif l:currentcharacter==#"d"
+        execute "normal! sh\e"
+    elseif l:currentcharacter==#"D"
+        execute "normal! sH\e"
+    elseif l:currentcharacter==#"h"
+        execute "normal! sj\e"
+    elseif l:currentcharacter==#"H"
+        execute "normal! sJ\e"
+    elseif l:currentcharacter==#"t"
+        execute "normal! sk\e"
+    elseif l:currentcharacter==#"T"
+        execute "normal! sK\e"
+    elseif l:currentcharacter==#"n"
+        execute "normal! sl\e"
+    elseif l:currentcharacter==#"N"
+        execute "normal! sL\e"
+    elseif l:currentcharacter==#"s"
+        execute "normal! s;\e"
+    elseif l:currentcharacter==#"S"
+        execute "normal! s:\e"
+    elseif l:currentcharacter==#"-"
+        execute "normal! s'\e"
+    elseif l:currentcharacter==#"_"
+        execute "normal! s\"\e"
+    elseif l:currentcharacter==#";"
+        execute "normal! sz\e"
+    elseif l:currentcharacter==#":"
+        execute "normal! sZ\e"
+    elseif l:currentcharacter==#"q"
+        execute "normal! sx\e"
+    elseif l:currentcharacter==#"Q"
+        execute "normal! sX\e"
+    elseif l:currentcharacter==#"j"
+        execute "normal! sc\e"
+    elseif l:currentcharacter==#"J"
+        execute "normal! sC\e"
+    elseif l:currentcharacter==#"k"
+        execute "normal! sv\e"
+    elseif l:currentcharacter==#"K"
+        execute "normal! sV\e"
+    elseif l:currentcharacter==#"x"
+        execute "normal! sb\e"
+    elseif l:currentcharacter==#"X"
+        execute "normal! sB\e"
+    elseif l:currentcharacter==#"b"
+        execute "normal! sn\e"
+    elseif l:currentcharacter==#"B"
+        execute "normal! sN\e"
+    elseif l:currentcharacter==#"m"
+        execute "normal! sm\e"
+    elseif l:currentcharacter==#"M"
+        execute "normal! sM\e"
+    elseif l:currentcharacter==#"w"
+        execute "normal! s,\e"
+    elseif l:currentcharacter==#"W"
+        execute "normal! s<\e"
+    elseif l:currentcharacter==#"v"
+        execute "normal! s.\e"
+    elseif l:currentcharacter==#"V"
+        execute "normal! s>\e"
+    elseif l:currentcharacter==#"z"
+        execute "normal! s/\e"
+    elseif l:currentcharacter==#"Z"
+        execute "normal! s?\e"
+    endif
+endfunction 
+
+" Convent letter to dvorak
+function! DvorakLetter()
+    let l:currentcharacter=matchstr(getline('.'), '\%' . col('.') . 'c.')
+    if l:currentcharacter==#"-"
+        execute "normal! s[\e"
+    elseif l:currentcharacter==#"_"
+        execute "normal! s{\e"
+    elseif l:currentcharacter==#"="
+        execute "normal! s]\e"
+    elseif l:currentcharacter==#"+"
+        execute "normal! s}\e"
+    elseif l:currentcharacter==#"q"
+        execute "normal! s'\e"
+    elseif l:currentcharacter==#"Q"
+        execute "normal! s\"\e"
+    elseif l:currentcharacter==#"w"
+        execute "normal! s,\e"
+    elseif l:currentcharacter==#"W"
+        execute "normal! s<\e"
+    elseif l:currentcharacter==#"e"
+        execute "normal! s.\e"
+    elseif l:currentcharacter==#"E"
+        execute "normal! s>\e"
+    elseif l:currentcharacter==#"r"
+        execute "normal! sp\e"
+    elseif l:currentcharacter==#"R"
+        execute "normal! sP\e"
+    elseif l:currentcharacter==#"t"
+        execute "normal! sy\e"
+    elseif l:currentcharacter==#"T"
+        execute "normal! sY\e"
+    elseif l:currentcharacter==#"y"
+        execute "normal! sf\e"
+    elseif l:currentcharacter==#"Y"
+        execute "normal! sF\e"
+    elseif l:currentcharacter==#"u"
+        execute "normal! sg\e"
+    elseif l:currentcharacter==#"U"
+        execute "normal! sG\e"
+    elseif l:currentcharacter==#"i"
+        execute "normal! sc\e"
+    elseif l:currentcharacter==#"I"
+        execute "normal! sC\e"
+    elseif l:currentcharacter==#"o"
+        execute "normal! sr\e"
+    elseif l:currentcharacter==#"O"
+        execute "normal! sR\e"
+    elseif l:currentcharacter==#"p"
+        execute "normal! sl\e"
+    elseif l:currentcharacter==#"P"
+        execute "normal! sL\e"
+    elseif l:currentcharacter==#"["
+        execute "normal! s/\e"
+    elseif l:currentcharacter==#"{"
+        execute "normal! s?\e"
+    elseif l:currentcharacter==#"]"
+        execute "normal! s=\e"
+    elseif l:currentcharacter==#"}"
+        execute "normal! s+\e"
+    elseif l:currentcharacter==#"\\"
+        execute "normal! s\\\e"
+    elseif l:currentcharacter==#"|"
+        execute "normal! s|\e"
+    elseif l:currentcharacter==#"a"
+        execute "normal! sa\e"
+    elseif l:currentcharacter==#"A"
+        execute "normal! sA\e"
+    elseif l:currentcharacter==#"s"
+        execute "normal! so\e"
+    elseif l:currentcharacter==#"S"
+        execute "normal! sO\e"
+    elseif l:currentcharacter==#"d"
+        execute "normal! se\e"
+    elseif l:currentcharacter==#"D"
+        execute "normal! sE\e"
+    elseif l:currentcharacter==#"f"
+        execute "normal! su\e"
+    elseif l:currentcharacter==#"F"
+        execute "normal! sU\e"
+    elseif l:currentcharacter==#"g"
+        execute "normal! si\e"
+    elseif l:currentcharacter==#"G"
+        execute "normal! sI\e"
+    elseif l:currentcharacter==#"h"
+        execute "normal! sd\e"
+    elseif l:currentcharacter==#"H"
+        execute "normal! sD\e"
+    elseif l:currentcharacter==#"j"
+        execute "normal! sh\e"
+    elseif l:currentcharacter==#"J"
+        execute "normal! sH\e"
+    elseif l:currentcharacter==#"k"
+        execute "normal! st\e"
+    elseif l:currentcharacter==#"K"
+        execute "normal! sT\e"
+    elseif l:currentcharacter==#"l"
+        execute "normal! sn\e"
+    elseif l:currentcharacter==#"L"
+        execute "normal! sN\e"
+    elseif l:currentcharacter==#";"
+        execute "normal! ss\e"
+    elseif l:currentcharacter==#":"
+        execute "normal! sS\e"
+    elseif l:currentcharacter==#"'"
+        execute "normal! s-\e"
+    elseif l:currentcharacter==#"\""
+        execute "normal! s_\e"
+    elseif l:currentcharacter==#"z"
+        execute "normal! s;\e"
+    elseif l:currentcharacter==#"Z"
+        execute "normal! s:\e"
+    elseif l:currentcharacter==#"x"
+        execute "normal! sq\e"
+    elseif l:currentcharacter==#"X"
+        execute "normal! sQ\e"
+    elseif l:currentcharacter==#"c"
+        execute "normal! sj\e"
+    elseif l:currentcharacter==#"C"
+        execute "normal! sJ\e"
+    elseif l:currentcharacter==#"v"
+        execute "normal! sk\e"
+    elseif l:currentcharacter==#"V"
+        execute "normal! sK\e"
+    elseif l:currentcharacter==#"b"
+        execute "normal! sx\e"
+    elseif l:currentcharacter==#"B"
+        execute "normal! sX\e"
+    elseif l:currentcharacter==#"n"
+        execute "normal! sb\e"
+    elseif l:currentcharacter==#"N"
+        execute "normal! sB\e"
+    elseif l:currentcharacter==#"m"
+        execute "normal! sm\e"
+    elseif l:currentcharacter==#"M"
+        execute "normal! sM\e"
+    elseif l:currentcharacter==#","
+        execute "normal! sw\e"
+    elseif l:currentcharacter==#"<"
+        execute "normal! sW\e"
+    elseif l:currentcharacter==#"."
+        execute "normal! sv\e"
+    elseif l:currentcharacter==#">"
+        execute "normal! sV\e"
+    elseif l:currentcharacter==#"/"
+        execute "normal! sz\e"
+    elseif l:currentcharacter==#"?"
+        execute "normal! sZ\e"
+    endif
+endfunction 
+    
