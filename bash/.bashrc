@@ -18,7 +18,7 @@ whizadd () {
 
 # Go to Bookmark
 whiz () {
-    if [ "$1" != "" ]; then
+    if [ -n "$1" ]; then
         local bookmark_line=$(grep "$1 " ~/.NERDTreeBookmarks)
         local destination=${bookmark_line/$1 \~//Users/ztiara}
         local final_destination=${destination/$1 /}
@@ -51,8 +51,8 @@ nyan () {
 # ============================================================================
 frag () {
     local filename="$1"
-    echo '' > frag.txt
-    if [ "$2" != "" ]; then
+    if [ -n "$2" ]; then
+        echo '' > frag.txt
         for arg in "$@"
         do
             if [ "$arg" != "$1" ]; then
@@ -100,23 +100,23 @@ todonew() {
     do
         key="$1"
         case $key in
-            -name)
+            -na|-name)
             task_name="$2"
             task_create="1"
             ;;
-            -start)
+            -s|-start)
             task_start="$2"
             task_create="1"
             ;;
-            -end)
+            -e|-end)
             task_end="$2"
             task_create="1"
             ;;
-            -notes)
+            -no|-notes)
             task_notes="$2"
             task_create="1"
             ;;
-            -parent)
+            -p|-parent)
             task_parent="$2"
             task_create="1"
             ;;
@@ -127,13 +127,16 @@ todonew() {
         shift
         shift
     done
-    if [ "$task_create" != "" ]; then
+    if [ -n "$task_create" ]; then
         sqlite3 todolist.db "insert into data ('name', 'start', 'end', 'notes', 'parent') \
             values (\"$task_name\", \"$task_start\", \"$task_end\", \"$task_notes\", \"$task_parent\");"
         echo "New task created! :D"
     else
-        echo "Table Columns:"
-        echo "| id | name | start | end | notes | parent |"
+        cat << EOF
+
+usage: todonew [-na name] [-s start] [-e end] [-no notes] [-p parent]
+
+EOF
     fi
 }
 
@@ -142,8 +145,29 @@ todochange() {
     local task_id="$1"
     local col_name="$2"
     local col_value="$3"
-    sqlite3 todolist.db "update data set \"$col_name\"=\"$col_value\" \
-        where id=\"$task_id\";"
+    if [ -n "$col_value" ]; then
+        sqlite3 todolist.db "update data set \"$col_name\"=\"$col_value\" \
+            where id=\"$task_id\";"
+        echo "Task Updated! :D"
+    else
+        echo "usage: todochange id col_name col_value"
+    fi
+}
+
+todoprint() { 
+    read foo
+    while [ -n "$foo" ]
+    do
+        id=`expr "$foo" : "[0-9]*|"`
+        cut_string=${foo#$id}
+        echo "$id"
+        echo "$cut_string"
+        echo "$foo"
+        echo ""
+        read foo
+    done
+    echo "$num_columns"
+    echo "$widths"
 }
 
 # ============================================================================
