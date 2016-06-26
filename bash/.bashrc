@@ -155,19 +155,35 @@ todochange() {
 }
 
 todoprint() { 
-    read foo
-    while [ -n "$foo" ]
+    read line
+    local task_id=''
+    local task_name=''
+    local task_start=''
+    local task_end=''
+    local task_notes=''
+    local task_parent=''
+    local bar='-----|----------------------|------------|------------|------->'
+    echo "==================================================================>>"
+    echo " ID  | Name                 | Start      | End        | Notes"
+    echo "==================================================================>>"
+    while [ -n "$line" ]
     do
-        id=`expr "$foo" : "[0-9]*|"`
-        cut_string=${foo#$id}
-        echo "$id"
-        echo "$cut_string"
-        echo "$foo"
-        echo ""
-        read foo
+        task_id=$(echo "$line" | sed -e 's/\(.*\)|.*|.*|.*|.*|.*/\1/')
+        task_name=$(echo "$line" | sed -e 's/.*|\(.*\)|.*|.*|.*|.*/\1/')
+        task_start=$(echo "$line" | sed -e 's/.*|.*|\(.*\)|.*|.*|.*/\1/')
+        task_end=$(echo "$line" | sed -e 's/.*|.*|.*|\(.*\)|.*|.*/\1/')
+        task_notes=$(echo "$line" | sed -e 's/.*|.*|.*|.*|\(.*\)|.*/\1/')
+        task_parent=$(echo "$line" | sed -e 's/.*|.*|.*|.*|.*|\(.*\)/\1/')
+        # echo $task_id
+        # echo $task_name
+        # echo $task_start
+        # echo $task_end
+        # echo $task_notes
+        printf "%-4s | %-20s | %-10s | %-10s | %-10s\n" "$task_id" \
+                "$task_name" "$task_start" "$task_end" "$task_notes"
+        echo "$bar"
+        read line
     done
-    echo "$num_columns"
-    echo "$widths"
 }
 
 # ============================================================================
