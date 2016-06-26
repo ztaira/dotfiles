@@ -77,9 +77,41 @@ frag () {
 # todo() prints out tasks
 todo() {
     if [ "$1" == "" ]; then
-        sqlite3 todolist.db "select * from data where end=''"
+        sqlite3 todolist.db "select * from data where end=''" | todoprint
     elif [ "$1" == "all" ]; then
-        sqlite3 todolist.db "select * from data"
+        sqlite3 todolist.db "select * from data" | todoprint
+    elif [ "$1" == "done" ]; then
+        sqlite3 todolist.db "select * from data where end!=''" | todoprint
+    elif [ "$1" == "help" ]; then
+        cat << EOF
+Functions:
+    todochange - change an existing row
+    todocomplete - complete a task
+    todonew - create a new task
+    todoprint - format sqlite3 commands
+EOF
+    fi
+}
+
+# todochange() changes a task
+todochange() {
+    local task_id="$1"
+    local col_name="$2"
+    local col_value="$3"
+    if [ -n "$col_value" ]; then
+        sqlite3 todolist.db "update data set \"$col_name\"=\"$col_value\" \
+            where id=\"$task_id\";"
+        echo "Task Updated! :D"
+    else
+        echo "usage: todochange id col_name col_value"
+    fi
+}
+
+todocomplete() {
+    local task_id="$1"
+    local current_date=`date +"%Y-%m-%d"`
+    if [ -n "$task_id" ]; then
+        todochange "$task_id" "end" "$current_date"
     fi
 }
 
@@ -128,6 +160,9 @@ todonew() {
         shift
     done
     if [ -n "$task_create" ]; then
+        if [ "$task_start" == '' ]; then
+            task_start=`date +"%Y-%m-%d"`
+        fi
         sqlite3 todolist.db "insert into data ('name', 'start', 'end', 'notes', 'parent') \
             values (\"$task_name\", \"$task_start\", \"$task_end\", \"$task_notes\", \"$task_parent\");"
         echo "New task created! :D"
@@ -140,20 +175,7 @@ EOF
     fi
 }
 
-# todochange
-todochange() {
-    local task_id="$1"
-    local col_name="$2"
-    local col_value="$3"
-    if [ -n "$col_value" ]; then
-        sqlite3 todolist.db "update data set \"$col_name\"=\"$col_value\" \
-            where id=\"$task_id\";"
-        echo "Task Updated! :D"
-    else
-        echo "usage: todochange id col_name col_value"
-    fi
-}
-
+# todoprint formats the output of an sqlite3 command
 todoprint() { 
     read line
     local task_id=''
