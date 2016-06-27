@@ -191,11 +191,7 @@ todonew() {
             values (\"$task_name\", \"$task_start\", \"$task_end\", \"$task_notes\", \"$task_parent\");"
         echo "New task created! :D"
     else
-        cat << EOF
-
-usage: todonew [-na name] [-s start] [-e end] [-no notes] [-p parent]
-
-EOF
+        zmansynopsis todonew
     fi
 }
 
@@ -249,7 +245,7 @@ todoprint() {
 # ============================================================================
 # function that prints out a zman function entry
 zman() {
-    local man_file="zman.md"
+    local man_file="/Users/ztiara/zman.md"
     local print_line=""
     local func_to_search="$1"
     if [ -n "$func_to_search" ]; then
@@ -273,7 +269,7 @@ zman() {
 }
 
 zmansynopsis() {
-    local man_file="zman.md"
+    local man_file="/Users/ztiara/zman.md"
     local is_synopsis=""
     local in_function=""
     local func_to_search="$1"
