@@ -108,6 +108,20 @@ DESCRIPTION
 
     will set task 3's "end" column to equal 1995-12-3. 
 endtodochange
+
+### todocomplete
+NAME
+    todocomplete -- completes a task with the current or a provided date
+
+SYNOPSIS
+    todocomplete task_id [end_date]
+
+DESCRIPTION
+    If an end_date is not provided, this function will complete the task_id
+    with the current date. If an end date is provided, this function 
+    will complete task_id with the provided end date. 
+
+endtodocomplete
 endmodule
 
 ## zman (module)

@@ -135,7 +135,7 @@ todocomplete() {
     if [ -n "$task_id" ]; then
         todochange "$task_id" "end" "$end_date"
     else
-        echo "usage: todocomplete task_id [end_date]"
+        zmansynopsis todocomplete
     fi
 }
 
