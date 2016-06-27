@@ -95,10 +95,6 @@ nnoremap <leader>cc :call EasyLineComment('//')<cr>
 nnoremap <leader>ld :call MoveLinesDown(1)<cr>
 " Move Line Up
 nnoremap <leader>lu :call MoveLinesUp(1)<cr>
-" Move 2 lines down
-nnoremap <leader>2ld :call MoveLinesDown(2)<cr>
-" Move 2 lines up
-nnoremap <leader>2lu :call MoveLinesUp(2)<cr>
 " Insert newline above
 nnoremap <leader>O :execute "normal! O\e"<cr>
 " Insert newline below
