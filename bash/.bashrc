@@ -85,10 +85,17 @@ todo() {
     elif [ "$1" == "help" ]; then
         cat << EOF
 Functions:
-    todochange - change an existing row
-    todocomplete - complete a task
-    todonew - create a new task
-    todoprint - format sqlite3 commands
+    todo............display the todo list
+                    usage: todo [all] [done] [help]
+    todochange......change an existing row
+                    usage: todochange task_id col_name col_value
+    todocomplete....complete a task
+                    usage: todocomplete task_id [end_date]
+    todonew.........create a new task
+                    usage: todonew [-na name] [-s start] [-e end] [-no notes]
+                                   [-p parent]
+    todoprint.......format sqlite3 commands
+                    usage: (sqlite_command) | todoprint
 EOF
     fi
 }
@@ -109,9 +116,15 @@ todochange() {
 
 todocomplete() {
     local task_id="$1"
-    local current_date=`date +"%Y-%m-%d"`
+    local task_end="$2"
+    local end_date=`date +"%Y-%m-%d"`
+    if [ -n "$task_end" ]; then
+        end_date="$task_end"
+    fi
     if [ -n "$task_id" ]; then
-        todochange "$task_id" "end" "$current_date"
+        todochange "$task_id" "end" "$end_date"
+    else
+        echo "usage: todocomplete task_id [end_date]"
     fi
 }
 
@@ -184,6 +197,8 @@ todoprint() {
     local task_end=''
     local task_notes=''
     local task_parent=''
+    local temp_name=''
+    local temp_notes=''
     local bar='-----|----------------------|------------|------------|------->'
     echo "==================================================================>>"
     echo " ID  | Name                 | Start      | End        | Notes"
@@ -201,8 +216,18 @@ todoprint() {
         # echo $task_start
         # echo $task_end
         # echo $task_notes
-        printf "%-4s | %-20s | %-10s | %-10s | %-10s\n" "$task_id" \
-                "$task_name" "$task_start" "$task_end" "$task_notes"
+        while [ -n "$task_name$task_notes" ]
+        do
+            temp_name="${task_name:0:20}"
+            temp_notes="${task_notes:0:20}"
+            printf "%-4s | %-20s | %-10s | %-10s | %-10s\n" "$task_id" \
+                    "$temp_name" "$task_start" "$task_end" "$temp_notes"
+            task_id=''
+            task_name="${task_name:20}"
+            task_start=''
+            task_end=''
+            task_notes="${task_notes:20}"
+        done
         echo "$bar"
         read line
     done
