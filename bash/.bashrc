@@ -13,7 +13,12 @@ set -o vi
 # Add Bookmark
 whizadd () {
     local full_path=$PWD
-    echo "$1 ${full_path/$HOME/~}" >> ~/.NERDTreeBookmarks
+    local bookmark_name="$1"
+    if [ -n "$bookmark_name" ]; then
+        echo "$bookmark_name ${full_path/$HOME/~}" >> ~/.NERDTreeBookmarks
+    else
+        zmansynopsis whizadd
+    fi
 }
 
 # Go to Bookmark
@@ -49,23 +54,28 @@ nyan () {
 # ============================================================================
 # Code Snip Function - frag (frag, as in "only use the fragments you want")
 # ============================================================================
+# function that snips code fragments
 frag () {
     local filename="$1"
-    if [ -n "$2" ]; then
-        echo '' > frag.txt
-        for arg in "$@"
-        do
-            if [ "$arg" != "$1" ]; then
-                local first_number=$(echo $arg | sed -e 's/\.\..*//')
-                local second_number=$(echo $arg | sed -e 's/.*\.\.//')
-                for line in `seq $first_number $second_number`
-                do
-                    sed "${line}q;d" $filename >> frag.txt
-                done
-            fi
-        done
+    if [ -n "$filename" ]; then
+        if [ -n "$2" ]; then
+            echo '' > frag.txt
+            for arg in "$@"
+            do
+                if [ "$arg" != "$1" ]; then
+                    local first_number=$(echo $arg | sed -e 's/\.\..*//')
+                    local second_number=$(echo $arg | sed -e 's/.*\.\.//')
+                    for line in `seq $first_number $second_number`
+                    do
+                        sed "${line}q;d" $filename >> frag.txt
+                    done
+                fi
+            done
+        else
+            cat -n $1
+        fi
     else
-        cat -n $1
+        zmansynopsis frag
     fi
 }
 
@@ -110,10 +120,11 @@ todochange() {
             where id=\"$task_id\";"
         echo "Task Updated! :D"
     else
-        echo "usage: todochange id col_name col_value"
+        zmansynopsis todochange
     fi
 }
 
+# autocompletes a task with the current or provided date
 todocomplete() {
     local task_id="$1"
     local task_end="$2"
@@ -234,6 +245,65 @@ todoprint() {
 }
 
 # ============================================================================
+# Documentation Function - zman (zman, as in "Zach's version of man")
+# ============================================================================
+# function that prints out a zman function entry
+zman() {
+    local man_file="zman.md"
+    local print_line=""
+    local func_to_search="$1"
+    if [ -n "$func_to_search" ]; then
+        OLD_IFS="$IFS"
+        IFS=''
+        while read line
+        do
+            if [ "$line" == "### $func_to_search" ]; then
+                print_line='1'
+            elif [ "$line" == "end$func_to_search" ]; then
+                print_line=''
+            fi
+            if [ -n "$print_line" ]; then
+                echo "$line"
+            fi
+        done < "$man_file"
+        IFS="$OLD_IFS"
+    else
+        zmansynopsis zman
+    fi
+}
+
+zmansynopsis() {
+    local man_file="zman.md"
+    local is_synopsis=""
+    local in_function=""
+    local func_to_search="$1"
+    if [ -n "$func_to_search" ]; then
+        OLD_IFS="$IFS"
+        IFS=''
+        while read line
+        do
+            if [ "$line" == "### $func_to_search" ]; then
+                in_function='1'
+            elif [ "$line" == "end$func_to_search" ]; then
+                in_function=''
+            fi
+            if [ "$line" == "SYNOPSIS" ]; then
+                is_synopsis='1'
+            elif [ "$line" == "DESCRIPTION" ]; then
+                is_synopsis=''
+            fi
+            if [ -n "$in_function" ]; then
+                if [ -n "$is_synopsis" ]; then
+                    echo "$line"
+                fi
+            fi
+        done < "$man_file"
+        IFS="$OLD_IFS"
+    else
+        zmansynopsis zmansynopsis
+    fi
+}
+
 # tmux
 # ============================================================================
 # sessions

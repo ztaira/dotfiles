@@ -93,4 +93,67 @@ DESCRIPTION
             respective uses
 
 endtodo
+
+### todochange
+NAME
+    todochange -- change a row in the task database
+
+SYNOPSIS
+    todochange task_id column_name column_value
+
+DESCRIPTION
+    Todochange will set column_name to column_value in the row task_id. For
+    example, calling:
+        todochange 3 end 1995-12-3
+
+    will set task 3's "end" column to equal 1995-12-3. 
+endtodochange
+endmodule
+
+## zman (module)
+### zman
+NAME
+    zman -- search the documentation for a zach-related function
+
+SYNOPSIS
+    zman func_to_search
+
+DESCRIPTION
+    Calling zman will print out a description of the function operand you give
+    it. These function descriptions are stored in the zman.md file, and are
+    formatted as follows:
+
+    ## module_name (module)
+    ### module_function
+    NAME
+        module_function - description of module_function
+
+    SYNOPSIS
+        module_function required_argument [optional_argument]
+
+    DESCRIPTION
+        Description of module_function in more depth. 
+
+    endmodule_function
+    endmodule
+
+endzman
+
+### zmansynopsis
+NAME
+    zmansynopsis -- get the synopsis of a zach-related function
+
+SYNOPSIS
+    zmansynopsis func_to_search
+
+DESCRIPTION
+    Calling zmansynopsis will print out the synopsis of the function operand
+    you give it. For example, calling:
+        zmansynopsis zmansynopsis
+
+    would print the synopsis for this function, which is:
+    SYNOPSIS
+        zmansynopsis func_to_search
+
+endzmansynopsis
 endmodule
