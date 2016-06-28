@@ -86,15 +86,15 @@ frag () {
 # Todo List Functions - todo (todo, as in "todo list")
 # ============================================================================
 # table created with:
-# sqlite3 todolist.db "create table data (id INTEGER PRIMARY KEY, name TEXT, start TEXT, end TEXT, notes TEXT, parent TEXT)"
+# sqlite3 ~/todolist.db "create table data (id INTEGER PRIMARY KEY, name TEXT, start TEXT, end TEXT, notes TEXT, parent TEXT)"
 # todo() prints out tasks
 todo() {
     if [ "$1" == "" ]; then
-        sqlite3 todolist.db "select * from data where end=''" | todoprint
+        sqlite3 ~/todolist.db "select * from data where end=''" | todoprint
     elif [ "$1" == "all" ]; then
-        sqlite3 todolist.db "select * from data" | todoprint
+        sqlite3 ~/todolist.db "select * from data" | todoprint
     elif [ "$1" == "done" ]; then
-        sqlite3 todolist.db "select * from data where end!=''" | todoprint
+        sqlite3 ~/todolist.db "select * from data where end!=''" | todoprint
     elif [ "$1" == "help" ]; then
         cat << EOF
 Functions:
@@ -119,7 +119,7 @@ todochange() {
     local col_name="$2"
     local col_value="$3"
     if [ -n "$col_value" ]; then
-        sqlite3 todolist.db "update data set \"$col_name\"=\"$col_value\" \
+        sqlite3 ~/todolist.db "update data set \"$col_name\"=\"$col_value\" \
             where id=\"$task_id\";"
         echo "Task Updated! :D"
     else
@@ -190,7 +190,7 @@ todonew() {
         if [ "$task_start" == '' ]; then
             task_start=`date +"%Y-%m-%d"`
         fi
-        sqlite3 todolist.db "insert into data ('name', 'start', 'end', 'notes', 'parent') \
+        sqlite3 ~/todolist.db "insert into data ('name', 'start', 'end', 'notes', 'parent') \
             values (\"$task_name\", \"$task_start\", \"$task_end\", \"$task_notes\", \"$task_parent\");"
         echo "New task created! :D"
     else
