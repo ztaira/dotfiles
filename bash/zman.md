@@ -122,6 +122,20 @@ DESCRIPTION
     will complete task_id with the provided end date. 
 
 endtodocomplete
+
+### todonew
+NAME
+    todonew -- complete a task
+
+SYNOPSIS
+    todonew [-na name] [-s start] [-e end] [-no notes] [-p parent]
+
+DESCRIPTION
+    Todonew creates a new task. It automatically includes a start date as 
+    long as some options are provided. 
+
+    If no options are provided, a new task is not created.
+endtodonew
 endmodule
 
 ## zman (module)
