@@ -21,7 +21,7 @@ DESCRIPTION
     [name]..............[directory]
 
 endwhiz
-
+.
 ### whizadd
 NAME
     whizadd -- add the current directory to the whiz bookmarks file
@@ -93,7 +93,7 @@ DESCRIPTION
             respective uses
 
 endtodo
-
+.
 ### todochange
 NAME
     todochange -- change a row in the task database
@@ -107,8 +107,9 @@ DESCRIPTION
         todochange 3 end 1995-12-3
 
     will set task 3's "end" column to equal 1995-12-3. 
-endtodochange
 
+endtodochange
+.
 ### todocomplete
 NAME
     todocomplete -- completes a task with the current or a provided date
