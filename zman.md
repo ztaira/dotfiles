@@ -123,7 +123,7 @@ DESCRIPTION
     will complete task_id with the provided end date. 
 
 endtodocomplete
-
+.
 ### todonew
 NAME
     todonew -- complete a task

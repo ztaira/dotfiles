@@ -61,6 +61,8 @@ set noswapfile
 set cryptmethod=blowfish
 set nobackup
 "
+" Vim folding autocommands
+autocmd VimEnter zman.md :source ~/.vim/syntax/zman.vim
 " ============================================================================
 " PLUGINS
 " ============================================================================

@@ -10,17 +10,6 @@ set -o vi
 # ============================================================================
 # Bookmark Functions - whiz (whiz, as in "whiz to $bookmarkname")
 # ============================================================================
-# Add Bookmark
-whizadd () {
-    local full_path=$PWD
-    local bookmark_name="$1"
-    if [ -n "$bookmark_name" ]; then
-        echo "$bookmark_name ${full_path/$HOME/~}" >> ~/.NERDTreeBookmarks
-    else
-        zmansynopsis whizadd
-    fi
-}
-
 # Go to Bookmark
 whiz () {
     local bookmark_name="$1"
@@ -37,6 +26,17 @@ whiz () {
         echo "Here are the bookmarks you can currently whiz to:"
         nyan ~/.NERDTreeBookmarks 20
         echo ""
+    fi
+}
+
+# Add Bookmark
+whizadd () {
+    local full_path=$PWD
+    local bookmark_name="$1"
+    if [ -n "$bookmark_name" ]; then
+        echo "$bookmark_name ${full_path/$HOME/~}" >> ~/.NERDTreeBookmarks
+    else
+        zmansynopsis whizadd
     fi
 }
 
