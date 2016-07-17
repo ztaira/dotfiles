@@ -121,7 +121,7 @@ nnoremap <leader>pwd :pwd<cr>
 " Change current window to file directory
 nnoremap <leader>cd :lcd %:p:h<cr>
 " Compile C File
-nnoremap <leader>cf :!gcc -o output %:t
+nnoremap <leader>cf :!g++ -o output %:t
 " Run executable 
 nnoremap <leader>re :!./output
 " Run Python File
