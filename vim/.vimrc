@@ -285,10 +285,10 @@ function! CompileFile(...)
     let l:hasncurses=system(l:searchstring)
     echom "Compiling with the following libraries:"
     if l:hasncurses==?''
-        execute '!g++ -o output %:t'
+        execute "!g++ -o output %:t"
         echom "none"
     else
-        execute '!g++ -o output %:t -lncurses'
+        execute "!g++ -o output %:t -lncurses"
         echom "ncurses"
     endif
 endfunction
