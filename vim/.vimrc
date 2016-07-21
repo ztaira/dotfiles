@@ -37,7 +37,7 @@ set incsearch ignorecase smartcase
 " Fix compatilility issues
 set nocompatible
 " Mouse
-set mouse=a
+set mouse=
 " Tabs
 set tabstop=4
 set shiftwidth=4
