@@ -120,8 +120,6 @@ nnoremap <leader>qq :q!<cr>
 nnoremap <leader>pwd :pwd<cr>
 " Change current window to file directory
 nnoremap <leader>cd :lcd %:p:h<cr>
-" Compile C File
-nnoremap <leader>cf :call CompileFile()<cr>
 " Run executable 
 nnoremap <leader>re :!./output
 " Run Python File
@@ -276,20 +274,6 @@ function! EasyLineComment(...)
         execute "normal! ^i# \e"
     elseif a:1 ==? "//"
         execute "normal! ^i// \e"
-    endif
-endfunction
-
-" function to compile c files intelligently
-function! CompileFile(...)
-    let l:searchstring="grep '#include <ncurses.h>' " . expand('%:t')
-    let l:hasncurses=system(l:searchstring)
-    echom "Compiling with the following libraries:"
-    if l:hasncurses==?''
-        execute "!g++ -o output %:t"
-        echom "none"
-    else
-        execute "!g++ -o output %:t -lncurses"
-        echom "ncurses"
     endif
 endfunction
 
