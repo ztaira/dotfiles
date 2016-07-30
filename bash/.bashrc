@@ -248,7 +248,7 @@ todoprint() {
 # ============================================================================
 # function that prints out a zman function entry
 zman() {
-    local man_file="/Users/ztiara/zman.md"
+    local man_file="/Users/zacharytaira/zman.md"
     local print_line=""
     local func_to_search="$1"
     if [ -n "$func_to_search" ]; then
@@ -272,7 +272,7 @@ zman() {
 }
 
 zmansynopsis() {
-    local man_file="/Users/ztiara/zman.md"
+    local man_file="/Users/zacharytaira/zman.md"
     local is_synopsis=""
     local in_function=""
     local func_to_search="$1"
