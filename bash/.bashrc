@@ -17,7 +17,7 @@ whiz () {
         zmansynopsis whiz
     elif [ -n "$bookmark_name" ]; then
         local bookmark_line=$(grep "$bookmark_name " ~/.NERDTreeBookmarks)
-        local destination=${bookmark_line/$bookmark_name \~//Users/ztiara}
+        local destination=${bookmark_line/$bookmark_name \~//Users/zacharytaira}
         local final_destination=${destination/$bookmark_name /}
         echo "Whizzing to $final_destination"
         cd $final_destination
