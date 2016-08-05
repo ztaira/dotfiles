@@ -64,6 +64,7 @@ set nobackup
 " Vim folding autocommands
 autocmd VimEnter zman.md :source ~/.vim/syntax/zman.vim
 autocmd VimEnter bug_notes.md :source ~/.vim/syntax/notes.vim
+autocmd VimEnter zzman.md :source ~/.vim/syntax/notes.vim
 " ============================================================================
 " PLUGINS
 " ============================================================================
