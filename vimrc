@@ -80,9 +80,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'godlygeek/tabular'
     " plugin for gitgutter
     Plug 'airblade/vim-gitgutter'
-    " plugins for syntax checking
-    Plug 'scrooloose/syntastic'
-    Plug 'shutnik/jshint2.vim'
     " vim wiki
     Plug 'vimwiki/vimwiki'
     " Rust
@@ -91,13 +88,23 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
     " Python documentation
     Plug 'davidhalter/jedi-vim'
+    " Python code formatting
+    Plug 'psf/black'
     " Enhanced python syntax highlighting
-    Plug 'vim-python/python-syntax'
+    " Plug 'vim-python/python-syntax'
+    " plugins for syntax checking
+    " Plug 'scrooloose/syntastic'
+    " Plug 'shutnik/jshint2.vim'
 call plug#end()
 
 " For syntax checkers:
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 let g:syntastic_javascript_checkers = ['jshint']
+let g:jedi#completions_enabled = 0
+let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = "0"
+let g:jedi#smart_auto_mappings = 0
 filetype plugin on
 
 " ============================================================================
