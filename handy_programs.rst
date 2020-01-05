@@ -21,6 +21,8 @@ OS is Fedora unless otherwise mentioned.
 | cowsay                       | Ascii cow.                            |
 |                              |                                       |
 +------------------------------+---------------------------------------+
+| calibre                      | Open-source ebook reader              |
++------------------------------+---------------------------------------+
 | fzf                          | A command-line fuzzy-finder, by the   |
 |                              | creator of vim-plug.                  |
 |                              |                                       |
@@ -42,8 +44,22 @@ OS is Fedora unless otherwise mentioned.
 |                              | and syslog-compatible API.            |
 |                              |                                       |
 +------------------------------+---------------------------------------+
+| jq                           | A command-line json parser. Like      |
+|                              | `sed`, but for json.                  |
+|                              |                                       |
++------------------------------+---------------------------------------+
 | kitty                        | Cross-platform, fast, feature-full    |
 |                              | GPU-based terminal emulator           |
+|                              |                                       |
++------------------------------+---------------------------------------+
+| lastpass                     | A free password manager with paid     |
+|                              | support. Supports all browsers.       |
+|                              |                                       |
++------------------------------+---------------------------------------+
+| masterpassword               | Another password manager, but can     |
+|                              | operate via the command line.         |
+|                              | Algorithmically generates passwords   |
+|                              | based on a master password.           |
 |                              |                                       |
 +------------------------------+---------------------------------------+
 | neovim, python3-neovim       | Backwards-compatible, open-source,    |
@@ -53,12 +69,18 @@ OS is Fedora unless otherwise mentioned.
 | NetworkManager               | Program to help manage network        |
 |                              | connections. Can be used via TUI      |
 |                              | (``nmtui``) or CLI (``nmcli``).       |
+|                              |                                       |
 +------------------------------+---------------------------------------+
 | pandoc                       | Universal markup language converter   |
 |                              |                                       |
 +------------------------------+---------------------------------------+
 | playerctl                    | Command-line controller and library   |
 |                              | for various audio players             |
+|                              |                                       |
++------------------------------+---------------------------------------+
+| ripgrep                      | A fast grep clone with nice output.   |
+|                              | Maybe even the _fastest_ grep clone,  |
+|                              | including grep itself.                |
 |                              |                                       |
 +------------------------------+---------------------------------------+
 | scrot                        | Screenshot program                    |
@@ -85,6 +107,12 @@ OS is Fedora unless otherwise mentioned.
 | tar                          | A Linux utility for saving many files |
 |                              | together into a single archive. Comes |
 |                              | with built-in compression support.    |
+|                              |                                       |
++------------------------------+---------------------------------------+
+| uBlock Origin                | A wide-spectrum blocker, often used   |
+|                              | to block ads. Installed via firefox   |
+|                              | add-on or chrome extension. Unrelated |
+|                              | to uBlock and uBlock.org.             |
 |                              |                                       |
 +------------------------------+---------------------------------------+
 | wireshark                    | Extremely powerful packet capture and |
