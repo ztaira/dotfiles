@@ -181,6 +181,16 @@ bindsym XF86AudioRaiseVolume exec amixer sset 'Master' 5%+
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym Mod1+1 exec xrandr --output eDP-1 --brightness 0.1
+bindsym Mod1+2 exec xrandr --output eDP-1 --brightness 0.2
+bindsym Mod1+3 exec xrandr --output eDP-1 --brightness 0.3
+bindsym Mod1+4 exec xrandr --output eDP-1 --brightness 0.4
+bindsym Mod1+5 exec xrandr --output eDP-1 --brightness 0.5
+bindsym Mod1+6 exec xrandr --output eDP-1 --brightness 0.6
+bindsym Mod1+7 exec xrandr --output eDP-1 --brightness 0.7
+bindsym Mod1+8 exec xrandr --output eDP-1 --brightness 0.8
+bindsym Mod1+9 exec xrandr --output eDP-1 --brightness 0.9
+bindsym Mod1+0 exec xrandr --output eDP-1 --brightness 1.0
 
 # Media player controls
 bindsym Mod1+Up exec playerctl play
@@ -191,6 +201,7 @@ bindsym Mod1+Left exec playerctl previous
 # lock screen
 # -i option for image
 bindsym $mod+Shift+BackSpace exec "i3lock -f"
+bindsym $mod+Shift+q exec "i3lock -f"
 # Shamelessly taken from reddit
 # Multi-screen screenshots with scrot
 bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # All screens

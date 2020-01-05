@@ -15,9 +15,11 @@ source ~/.bash_secrets
 # ============================================================================
 # Environment Settings
 # ============================================================================
-# git stuff
+# better ls
 alias ls="ls --color"
 alias la="ls -laFG --color"
+# git stuff
+alias gg="cd ~/Documents"
 alias gl="git log --graph"
 alias gh="git log --pretty=format:'%C(yellow)%h%Creset %ad %C(yellow)|%Creset %s%C(bold blue)%d%Creset %C(red)[%an]%Creset' --graph --date=short"
 alias gs="git status"
@@ -63,13 +65,16 @@ alias matlab='/Applications/MATLAB_R2014b.app/bin/matlab -nodesktop'
 
 # set the default readline editing mode to emacs, the default
 # hey, gotta get some emacs experience somehow
-export EDITOR=vim
 set -o emacs
+# use nvim for git commit messages
+export EDITOR=/usr/bin/nvim
+export GIT_EDITOR=/usr/bin/nvim
 
 # Change volume via the terminal
 alias vol="alsamixer" # linux: get a TUI for volume
 # Use nvim for vi
 alias vi="nvim"
+alias vim="/usr/bin/vi"
 # Open
 alias win="xdg-open ." # linux: open a new window
 alias open="xdg-open" # linux: open a thing
@@ -92,8 +97,8 @@ LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:c
 export LS_COLORS
 # run python in environment
 # currently pipenv, but might be poetry, eventually.
-alias prp="pipenv run python"
-alias psh="pipenv shell"
+alias prp="poetry run python"
+alias psh="poetry shell"
 # hub
 alias "hi"="hub issue -^"
 alias "hpr"="hub pull-request"
