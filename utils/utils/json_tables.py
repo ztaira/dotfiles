@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from typing import Dict
 from typing import List
 import copy
-import random
 
 
 class WordTooLongError(Exception):
@@ -50,7 +49,8 @@ class Table:
         )
         return f"{self.intersection_point}{format_string}{self.intersection_point}\n"
 
-    def pop_words(self, cell: Cell, row_data: List) -> str:
+    @classmethod
+    def pop_words(cls, cell: Cell, row_data: List) -> str:
         """Smartly split row data so that it fits in a cell"""
         return_str = ""
         if row_data and len(row_data[0]) > cell.width - 2:
@@ -77,7 +77,7 @@ class Table:
     @classmethod
     def from_dict(cls, rows: List[Dict]):
         """Load in a message from the dict"""
-        all_keys = []
+        all_keys: List = []
         # thonking emoji
         for row in rows:
             for key in row.keys():
@@ -86,32 +86,3 @@ class Table:
         data = copy.deepcopy(rows)
         cells = [Cell(name=key) for key in all_keys]
         return cls(data=data, cells=cells)
-
-
-def test_table():
-    """main"""
-    entries = [
-        {
-            "name": "Have you heard the tragedy of Darth Plagueis the wise?",
-            "description": "Darth Plagueis was a Dark Lord of the Sith so powerful and so wise, he could use the Force to influence the midi-chlorians to create life. He had such a knowledge of the dark side, he could even keep the ones he cared about from dying.",
-            "notes": "Lorem ipsum is boring",
-        },
-        {
-            "name": "I have the high ground",
-            "description": "And I feel not just a sense of accomplishment, but accomplishwoment and accomplishchildrent too",
-            "notes": "These aren't the memes you're looking for",
-        },
-    ]
-
-    table = Table.from_dict(entries)
-    table.cells[1].width = 40
-
-    with open('reference_jt.txt', 'r') as readfile:
-        assert table.as_ascii() == readfile.read()
-
-    with open('reference_jt.txt', 'w') as writefile:
-        writefile.write(table.as_ascii())
-
-
-if __name__ == "__main__":
-    test_table()
