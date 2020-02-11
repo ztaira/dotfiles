@@ -1,21 +1,24 @@
 #!/bin/bash
 
-RED="\e[0;31m"                                                              
-GRE="\e[0;32m"                                                              
-YEL="\e[0;33m"                                                              
-BLU="\e[0;34m"                                                              
-MAG="\e[0;35m"                                                              
-CYN="\e[0;36m"                                                              
-GRA="\e[0;37m" 
+# chmod to 755
+# put in .git/hooks/pre-commit
 
-git grep --cached -i -e "fuck"
+RED="\e[0;31m"
+GRE="\e[0;32m"
+YEL="\e[0;33m"
+BLU="\e[0;34m"
+MAG="\e[0;35m"
+CYN="\e[0;36m"
+GRA="\e[0;37m"
+
+git grep --cached -i -e "fuck" ":(exclude)*pre-commit"
 if [ $? -eq 0 ]
 then
   printf "\n${RED}^^^ Don't swear in public.\n${GRA}"
   exit 1
 fi
 
-git grep --cached -e "<<<<<<<" -e ">>>>>>>"
+git grep --cached -e "<<<<<<<" -e ">>>>>>>" ":(exclude)*pre-commit"
 if [ $? -eq 0 ]
 then
   printf "\n${RED}^^^ Looks like you forgot to resolve something.\n${GRA}"
@@ -23,4 +26,3 @@ then
 fi
 
 exit 0
-

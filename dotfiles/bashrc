@@ -10,6 +10,7 @@ setxkbmap -layout us,us -variant dvorak, -option "lv3:rwin_switch,grp:alt_space_
 source ~/.cargo/env
 export PATH=$PATH:~/.local/bin # add .local/bin to path
 export HISTSIZE="" # linux: infinite history
+export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 source ~/.bash_secrets
 
 # ============================================================================
@@ -21,7 +22,16 @@ alias la="ls -laFG --color"
 # git stuff
 alias gg="cd ~/Documents"
 alias gl="git log --graph"
-alias gh="git log --pretty=format:'%C(yellow)%h%Creset %ad %C(yellow)|%Creset %s%C(bold blue)%d%Creset %C(red)[%an]%Creset' --graph --date=short"
+# look at git log --help for pretty format information. TLDR as follows:
+# %C(yellow)%h%C(reset)       switch to yellow, print abbreviated commit, reset color
+# %ad                         print author date
+# %C(yellow)|%C(reset)        switch to yellow, print |, reset color
+# %s                          print subject
+# %C(bold blue)%d%C(reset)    switch to bold blue, print ref names, reset color
+# %C(red)[%an]%C(reset)       switch to red, print [author name ], reset color
+# --graph                     print a graph on the left-hand side
+# --date=short                print dates in short format
+alias gh="git log --pretty=format:'%C(yellow)%h%C(reset) %ad %C(yellow)|%C(reset) %s%C(bold blue)%d%C(reset) %C(red)[%an]%C(reset)' --graph --date=short"
 alias gs="git status"
 alias ga="git add"
 alias gb="git branch"
@@ -41,6 +51,9 @@ alias gstd="git stash drop"
 alias gri="git rebase -i"
 alias gpsuo="git push --set-upstream origin"
 alias cmake="/Applications/CMake.app/Contents/bin/cmake"
+gdh() {
+  git diff "HEAD~${1}" "HEAD~${2}"
+}
 # by http://github.com/jehiah
 # this prints out some branch status (similar to the '... ahead' info you get from git status)
 # modified by me
@@ -189,7 +202,7 @@ whizo () {
         local destination=${bookmark_line/$bookmark_name \~//home/zachtaira}
         local final_destination=${destination/$bookmark_name /}
         echo "Whizzing to $final_destination"
-        open "$final_destination"
+        xdg-open "$final_destination"
     else
         echo ""
         echo "Here are the bookmarks you can currently whiz to:"
@@ -368,7 +381,7 @@ todonew() {
 }
 
 # todoprint formats the output of an sqlite3 command
-todoprint() { 
+todoprint() {
     read line
     local task_id=''
     local task_name=''

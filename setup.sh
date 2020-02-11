@@ -13,3 +13,6 @@ ln -s ~/zach_stuff/dotfiles/dotfiles/config/kitty ~/.config/kitty
 # vim
 ln -s ~/zach_stuff/dotfiles/dotfiles/config/nvim ~/.config/
 ln -s ~/zach_stuff/dotfiles/dotfiles/config/nvim ~/.vim
+
+# ripgrep
+ln -s ~/zach_stuff/dotfiles/dotfiles/ripgreprc ~/.rgrc

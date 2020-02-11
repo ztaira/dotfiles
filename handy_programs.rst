@@ -74,6 +74,13 @@ OS is Fedora unless otherwise mentioned.
 | pandoc                       | Universal markup language converter   |
 |                              |                                       |
 +------------------------------+---------------------------------------+
+| pacmd                        | Tool for reconfiguring pulseaudio at  |
+|                              | runtime. For example, switching       |
+|                              | output from speakers to headphones or |
+|                              | vice-versa. Probably stands for       |
+|                              | PulseAudio cmd or something.          |
+|                              |                                       |
++------------------------------+---------------------------------------+
 | playerctl                    | Command-line controller and library   |
 |                              | for various audio players             |
 |                              |                                       |
@@ -109,13 +116,37 @@ OS is Fedora unless otherwise mentioned.
 |                              | with built-in compression support.    |
 |                              |                                       |
 +------------------------------+---------------------------------------+
+| thef*ck                      | Manificent app which corrects your    |
+|                              | previous console command. Written in  |
+|                              | Python.                               |
+|                              |                                       |
++------------------------------+---------------------------------------+
 | uBlock Origin                | A wide-spectrum blocker, often used   |
 |                              | to block ads. Installed via firefox   |
 |                              | add-on or chrome extension. Unrelated |
 |                              | to uBlock and uBlock.org.             |
 |                              |                                       |
 +------------------------------+---------------------------------------+
+| virtualbox                   | Free and open-source hypervisor for   |
+|                              | x86 virtualization. For running VMs.  |
+|                              |                                       |
++------------------------------+---------------------------------------+
 | wireshark                    | Extremely powerful packet capture and |
 |                              | analysis tool                         |
 |                              |                                       |
 +------------------------------+---------------------------------------+
+
+Theoretically Handy Programs
+============================
+
+Haven't tried them yet, but they seem cool.
+
+`
+[
+  {
+    "title": "cheat.sh",
+    "URL": "https://github.com/chubin/cheat.sh#usage",
+    "Description": "Community-driven, multi-language cheat sheet with many bindings."
+  }
+]
+`
