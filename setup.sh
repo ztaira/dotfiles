@@ -1,4 +1,4 @@
-rm -r ~/.bashrc ~/.vimrc ~/.config/i3 ~/.config/nvim ~/.config/kitty ~/.vim
+rm -r ~/.bashrc ~/.vimrc ~/.config/i3 ~/.config/nvim ~/.config/kitty ~/.vim ~/.rgrc
 
 # rc files
 ln -s ~/zach_stuff/dotfiles/dotfiles/bashrc ~/.bashrc
