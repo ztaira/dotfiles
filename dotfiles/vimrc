@@ -1,17 +1,17 @@
 " To open result of a grep in vim, do:
 " vim $(grep -ril [searchstring] [directory])
 "
-" $$$$$$$$\      $$\    $$\ $$\ 
-" \____$$  |     $$ |   $$ |\__|              
-"     $$  /      $$ |   $$ |$$\ $$$$$$\$$$$\  
-"    $$  /$$$$$$\\$$\  $$  |$$ |$$  _$$  _$$\ 
+" $$$$$$$$\      $$\    $$\ $$\
+" \____$$  |     $$ |   $$ |\__|
+"     $$  /      $$ |   $$ |$$\ $$$$$$\$$$$\
+"    $$  /$$$$$$\\$$\  $$  |$$ |$$  _$$  _$$\
 "   $$  / \______|\$$\$$  / $$ |$$ / $$ / $$ |
 "  $$  /           \$$$  /  $$ |$$ | $$ | $$ |
 " $$$$$$$$\         \$  /   $$ |$$ | $$ | $$ |
 " \________|         \_/    \__|\__| \__| \__| by Zach Taira
 "
 " ============================================================================
-" INDEX 
+" INDEX
 " ============================================================================
 " 0) Index
 " 1) Default Settings
@@ -32,7 +32,7 @@ colo zachscheme
 syntax on
 " Set the cursor lines to be on
 set cursorline cursorcolumn colorcolumn=80
-set list lcs=tab:\|\ 
+set list lcs=tab:\|\
 " Set line numbers on
 set number
 " Set search options
@@ -142,8 +142,8 @@ nnoremap <leader>tl :call CutLine()<cr>
 nnoremap <leader>sp :set paste<cr>
 nnoremap <leader>snp :set nopaste<cr>
 
-" File Manipulation mappings 
-" (for opening, closing, saving, compiling, and running files) 
+" File Manipulation mappings
+" (for opening, closing, saving, compiling, and running files)
 " Open New File
 nnoremap <leader>nf :vert new file.txt
 " Save File
@@ -158,7 +158,7 @@ nnoremap <leader>q :wq<cr>
 nnoremap <leader>qq :q!<cr>
 " Print current directory
 nnoremap <leader>pwd :pwd<cr>
-" Run executable 
+" Run executable
 nnoremap <leader>re :!./output
 " Run Python File
 nnoremap <leader>rp :!python %:p<cr>
@@ -245,7 +245,7 @@ endfunction
 
 " Function to move a variable amount of lines down 1 line
 function! MoveLinesDown(lines)
-    execute "normal! \"a" . a:lines . "dddd\"aPPj" 
+    execute "normal! \"a" . a:lines . "dddd\"aPPj"
 endfunction
 
 " Function to move a variable amount of lines up 1 line
@@ -272,15 +272,15 @@ function! GetCurrentSong()
     " Get the current song title and trim the \n
     let l:cname=system("osascript -e 'tell Application \"System Events\"\n
                 \ if application process \"Spotify\" exists then\n
-                \ tell application \"Spotify\" to name of 
+                \ tell application \"Spotify\" to name of
                 \ current track as string\n
                 \ end if\n
                 \ end tell'")
-    let l:cname = l:cname[:-2] 
+    let l:cname = l:cname[:-2]
     " Get the current song's artist and trim the \n
     let l:cartist=system("osascript -e 'tell Application \"System Events\"\n
                 \ if application process \"Spotify\" exists then\n
-                \ tell application \"Spotify\" to artist of 
+                \ tell application \"Spotify\" to artist of
                 \ current track as string\n
                 \ end if\n
                 \ end tell'")
@@ -326,7 +326,7 @@ endfunction
 function! GetMarkLine(...)
     let l:filter="cat ~/.viminfo |
                 \ grep \"\\\'" . a:1 . " \\d* \\d* .*\" |
-                \ sed -E \"s/\\\'" . a:1 . "  ([0-9]+)  ([0-9]+).*/\\1/\"" 
+                \ sed -E \"s/\\\'" . a:1 . "  ([0-9]+)  ([0-9]+).*/\\1/\""
     let l:linenumber=system(l:filter)
     return l:linenumber
 endfunction
@@ -335,7 +335,7 @@ endfunction
 function! GetMarkColumn(...)
     let l:filter="cat ~/.viminfo |
                 \ grep \"\\\'" . a:1 . " \\d* \\d* .*\" |
-                \ sed -E \"s/\\\'" . a:1 . "  ([0-9]+)  ([0-9]+).*/\\2/\"" 
+                \ sed -E \"s/\\\'" . a:1 . "  ([0-9]+)  ([0-9]+).*/\\2/\""
     let l:linecolumn=system(l:filter)
     return l:linecolumn
 endfunction
@@ -516,7 +516,7 @@ function! QwertyLetter()
     elseif l:currentcharacter==#"Z"
         execute "normal! s?\e"
     endif
-endfunction 
+endfunction
 
 " Convert letter to dvorak
 function! DvorakLetter()

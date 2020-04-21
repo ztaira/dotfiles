@@ -22,6 +22,12 @@ OS is Fedora unless otherwise mentioned.
 |                              |                                       |
 +------------------------------+---------------------------------------+
 | calibre                      | Open-source ebook reader              |
+|                              |                                       |
++------------------------------+---------------------------------------+
+| dtrx                         | Do the right extraction. Easily       |
+|                              | uncompress various formats like tar,  |
+|                              | zip, gzip, etc.                       |
+|                              |                                       |
 +------------------------------+---------------------------------------+
 | fzf                          | A command-line fuzzy-finder, by the   |
 |                              | creator of vim-plug.                  |

@@ -11,7 +11,7 @@ SYNOPSIS
 
 DESCRIPTION
     Search the bookmark file for a given bookmark name and navigate to the
-    directory file associated with that bookmark. 
+    directory file associated with that bookmark.
 
     If, instead of navigating to a certain directory, you want to open a window
     at said directory, use the `whizo` function. It is exactly the same as whiz,
@@ -56,11 +56,11 @@ SYNOPSIS
 DESCRIPTION
     If no operands besides the file name is provided, frag will simply
     output the text of the file with line numbers.
-    
+
     If line numbers in addition to the file name are provided, frag will
     take those lines and put them in a file called frag.txt. The order of the
-    lines will be maintained. 
-    
+    lines will be maintained.
+
     For example, calling:
         frag example.txt 1 3..5 2 5..7
 
@@ -111,7 +111,7 @@ DESCRIPTION
     example, calling:
         todochange 3 end 1995-12-3
 
-    will set task 3's "end" column to equal 1995-12-3. 
+    will set task 3's "end" column to equal 1995-12-3.
 
 endtodochange
 .
@@ -124,8 +124,8 @@ SYNOPSIS
 
 DESCRIPTION
     If an end_date is not provided, this function will complete the task_id
-    with the current date. If an end date is provided, this function 
-    will complete task_id with the provided end date. 
+    with the current date. If an end date is provided, this function
+    will complete task_id with the provided end date.
 
 endtodocomplete
 .
@@ -137,8 +137,8 @@ SYNOPSIS
     todonew [-na name] [-s start] [-e end] [-no notes] [-p parent]
 
 DESCRIPTION
-    Todonew creates a new task. It automatically includes a start date as 
-    long as some options are provided. 
+    Todonew creates a new task. It automatically includes a start date as
+    long as some options are provided.
 
     If no options are provided, a new task is not created.
 endtodonew
@@ -166,7 +166,7 @@ DESCRIPTION
         module_function required_argument [optional_argument]
 
     DESCRIPTION
-        Description of module_function in more depth. 
+        Description of module_function in more depth.
 
     endmodule_function
     endmodule

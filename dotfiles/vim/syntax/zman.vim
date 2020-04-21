@@ -36,4 +36,3 @@ function! GetZmanFoldLevel(lnum)
         return '-1'
     endif
 endfunction
-
