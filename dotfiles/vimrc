@@ -28,7 +28,8 @@ set wildmode=full
 set shellcmdflag+=lic
 " Color scheme
 set t_Co=256
-colo zachscheme
+colo dzachscheme
+" colo bzachscheme
 syntax on
 " Set the cursor lines to be on
 set cursorline cursorcolumn colorcolumn=80
