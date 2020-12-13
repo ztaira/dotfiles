@@ -42,7 +42,8 @@ alias gp="git pull"
 alias gd="git diff"
 alias gbr="git branch -r"
 alias gco="git checkout"
-alias gcf="git commit --fixup HEAD"
+alias gcf="git commit --fixup"
+alias gcfh="git commit --fixup HEAD"
 alias gdc="git diff --cached"
 alias gdn="git diff --name-only"
 alias gdfm="git diff origin/master"
@@ -51,11 +52,13 @@ alias gdcn="git diff --cached --name-only"
 alias gst="git stash"
 alias gsta="git stash apply"
 alias gstd="git stash drop"
-alias gr="git restore"
+alias gre="git restore"
+alias gres="git restore --staged"
 alias gri="git rebase -i"
-alias grs="git restore --staged"
+alias grc="git rebase --continue"
+alias grebs="git rebase --skip"
+alias grebc="git rebase --continue"
 alias gpsuo="git push --set-upstream origin"
-alias cmake="/Applications/CMake.app/Contents/bin/cmake"
 gdh() {
   git diff "HEAD~${1}" "HEAD~${2}"
 }
@@ -85,13 +88,19 @@ alias matlab='/Applications/MATLAB_R2014b.app/bin/matlab -nodesktop'
 # hey, gotta get some emacs experience somehow
 set -o emacs
 # use nvim for git commit messages
-export EDITOR=/usr/bin/nvim
-export GIT_EDITOR=/usr/bin/nvim
+# export EDITOR=/usr/bin/nvim
+# export GIT_EDITOR=/usr/bin/nvim
+# use nvim prerelease for git commit messages
+export EDITOR=/usr/bin/nvim.appimage
+export GIT_EDITOR=/usr/bin/nvim.appimage
+
 
 # Change volume via the terminal
 alias vol="alsamixer" # linux: get a TUI for volume
 # Use nvim for vi
-alias vi="nvim"
+# alias vi="nvim"
+# Use nvim prerelease for vi
+alias vi="nvim.appimage"
 alias vim="/usr/bin/vi"
 # Open
 alias win="xdg-open ." # linux: open a new window
@@ -162,18 +171,52 @@ __prompt_command() {
     PS1+="${MAG}(\$(parse_virtual_env)) ${BLU}\u${GRA} \\$ "
 }
 
-__prompt_command_empty() {
-  local PASS="0"
+__prompt_command_blind() {
+  local EXIT="$?"
+  PS1="\n\$(echo $EXIT) \u $ "
 }
 
 # PS1="\n${GRE}[ \w ]${YEL}\$(parse_git_branch)\n${BLU}\u${GRA} \\$ "
 PROMPT_COMMAND=__prompt_command
+
+# set the command to the sighted prompt
+sighted_prompt() {
+  PROMPT_COMMAND=__prompt_command
+}
+
+# set the command to the blind prompt
+blind_prompt() {
+  PROMPT_COMMAND=__prompt_command_blind
+}
 
 # ----------------------------------------------------------------------------
 # lol
 # ----------------------------------------------------------------------------
 alias please="sudo"
 alias ":q"="exit"
+
+# ============================================================================
+# Command to buzz every time internet goes down
+# ============================================================================
+lmk_if_internet_sux() {
+  local RED='\e[0;31m'
+  local GRA='\e[0;37m'
+  while true
+  do
+    local PING_OUTPUT=$(ping -c 1 -W 1 192.168.99.1 | grep icmp)
+    local CAN_PING=$?
+    local DATE=$(date +"%Y-%m-%d %H:%M:%S")
+    if [ "$PING_OUTPUT" != "" ]; then
+      local TEMP=0
+    else
+      printf "${RED}"
+      silly_notify -1
+    fi
+    echo "$CAN_PING $DATE || $PING_OUTPUT"
+    printf "${GRA}"
+    sleep 0.5
+  done
+}
 
 # ============================================================================
 # Command to play an appropriate jingle depending on the exit code was
