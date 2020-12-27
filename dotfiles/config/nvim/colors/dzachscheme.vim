@@ -72,32 +72,32 @@ let s:colors = {}
 
 " Base colors.
 " background 234
-let s:colors.base0 = { 'gui': '#0c1014', 'cterm': 234 }
+let s:colors.base0 = { 'gui': '#fff', 'cterm': 234 }
 " column highlighting 235
-let s:colors.base1 = { 'gui': '#11151c', 'cterm': 235 }
-" statusbar 238
-let s:colors.base2 = { 'gui': '#091f2e', 'cterm': 240  }
+let s:colors.base1 = { 'gui': '#fff', 'cterm': 235 }
+" statusbar 240
+let s:colors.base2 = { 'gui': '#fff', 'cterm': 240  }
 " visual select 236
-let s:colors.base3 = { 'gui': '#0a3749', 'cterm': 236  }
+let s:colors.base3 = { 'gui': '#fff', 'cterm': 236  }
 " comments 240
-let s:colors.base4 = { 'gui': '#245361', 'cterm': 240  }
+let s:colors.base4 = { 'gui': '#fff', 'cterm': 240  }
 " ???
-let s:colors.base5 = { 'gui': '#599cab', 'cterm': 2  }
+let s:colors.base5 = { 'gui': '#fff', 'cterm': 2  }
 " text 244
-let s:colors.base6 = { 'gui': '#000000', 'cterm': 244 }
+let s:colors.base6 = { 'gui': '#fff', 'cterm': 244 }
 " ???
-let s:colors.base7 = { 'gui': '#d3ebe9', 'cterm': 3 }
+let s:colors.base7 = { 'gui': '#fff', 'cterm': 3 }
 
 " Other colors.
-let s:colors.red     = { 'gui': '#c23127', 'cterm': 167 }
-let s:colors.orange  = { 'gui': '#d26937', 'cterm': 173 }
-let s:colors.yellow  = { 'gui': '#edb443', 'cterm': 106 }
+let s:colors.red     = { 'gui': '#fff', 'cterm': 167 }
+let s:colors.orange  = { 'gui': '#fff', 'cterm': 173 }
+let s:colors.yellow  = { 'gui': '#fff', 'cterm': 106 }
 " ???
-let s:colors.magenta = { 'gui': '#888ca6', 'cterm': 1 }
-let s:colors.violet  = { 'gui': '#4e5166', 'cterm': 60  }
-let s:colors.blue    = { 'gui': '#195466', 'cterm': 24  }
-let s:colors.cyan    = { 'gui': '#33859E', 'cterm': 6  }
-let s:colors.green   = { 'gui': '#2aa889', 'cterm': 29 }
+let s:colors.magenta = { 'gui': '#fff', 'cterm': 1 }
+let s:colors.violet  = { 'gui': '#fff', 'cterm': 60  }
+let s:colors.blue    = { 'gui': '#fff', 'cterm': 24  }
+let s:colors.cyan    = { 'gui': '#fff', 'cterm': 6  }
+let s:colors.green   = { 'gui': '#fff', 'cterm': 29 }
 
 
 " Native highlighting ==========================================================
