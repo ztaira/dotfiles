@@ -134,7 +134,12 @@ alias "hprl"="hub pr list -f '%>(8)%sC%i %Creset%t%l%pC (%H)%n' -^"
 alias "ipbra"="ip -br a"
 # delete a line from the known hosts file
 known_hosts() {
-    vi ~/.ssh/known_hosts
+  line=$1
+  if [ -z ${line} ]; then
+    nl -b a "$HOME/.ssh/known_hosts"
+  else
+    sed "${line}d" "$HOME/.ssh/known_hosts" -i
+  fi
 }
 
 # ----------------------------------------------------------------------------
