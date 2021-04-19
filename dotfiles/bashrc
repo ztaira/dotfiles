@@ -1,4 +1,9 @@
 #!/bin/bash
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # clear the keyboard mapping of options
 # necessary to run before setting since options are sticky
 setxkbmap -layout us,us -variant dvorak, -option
@@ -110,8 +115,6 @@ alias pbcopy="xclip" # linux: imitate pbcopy on mac
 alias pbpaste="xclip -o" # linux: imitate pbcopy on mac
 # ping
 alias p8="ping 8.8.8.8"
-# history, but pipe through grep
-alias hg="history | grep"
 # adjust brightness on linux
 alias xbr="xrandr --output eDP-1 --brightness"
 # ps
@@ -514,5 +517,18 @@ vo() {
     else
         grep -ril "$1" "$2" | grep -v "^\./\." | grep -v ".*__pycache__.*"
         vi $(grep -ril "$1" "$2" | grep -v "^\./\." | grep -v ".*__pycache__.*")
+    fi
+}
+
+# ============================================================================
+# history | grep convenience function
+# ============================================================================
+hg() {
+    if [ -n "$2" ]; then
+        history | grep "$1" | tail -n "$2"
+    elif [ -n "$1" ]; then
+        history | grep "$1"
+    else
+        history | tail -n 25
     fi
 }
