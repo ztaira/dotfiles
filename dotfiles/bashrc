@@ -20,6 +20,8 @@ sauce() {
   source ~/.bash_secrets
 }
 sauce
+# set the title to something kinda sane
+set title
 
 # ============================================================================
 # Environment Settings
@@ -45,14 +47,15 @@ alias ga="git add"
 alias gb="git branch"
 alias gp="git pull"
 alias gd="git diff"
+alias gap="git add -p"
 alias gbr="git branch -r"
 alias gco="git checkout"
 alias gcf="git commit --fixup"
 alias gcfh="git commit --fixup HEAD"
 alias gdc="git diff --cached"
 alias gdn="git diff --name-only"
-alias gdfm="git diff origin/master"
-alias gdnfm="git diff --name-only origin/master"
+alias gdom="git diff origin/master"
+alias gdnom="git diff --name-only origin/master"
 alias gdcn="git diff --cached --name-only"
 alias gst="git stash"
 alias gsta="git stash apply"
@@ -517,6 +520,20 @@ vo() {
     else
         grep -ril "$1" "$2" | grep -v "^\./\." | grep -v ".*__pycache__.*"
         vi $(grep -ril "$1" "$2" | grep -v "^\./\." | grep -v ".*__pycache__.*")
+    fi
+}
+
+# ============================================================================
+# ls | grep convenience function
+# ============================================================================
+
+lrg() {
+    if [ -n "$2" ]; then
+        ls $1 | rg "$2"
+    elif [ -n "$1" ]; then
+        ls "$1"
+    else
+        ls
     fi
 }
 

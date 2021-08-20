@@ -65,6 +65,10 @@ set noswapfile
 set nobackup
 " Autoindent sucks, don't use it. I'll do it myself.
 set noautoindent
+setlocal indentkeys-=:
+setlocal indentkeys-=#
+" set the title to something kinda sane
+set title
 "
 " Vim folding autocommands
 " autocmd VimEnter zman.md :source ~/.vim/syntax/zman.vim
@@ -114,6 +118,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
     " file directory plugin
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+    " -------------------------------------
+    " Trial Plugins
+    " -------------------------------------
+    " easy file finding
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 
     " -------------------------------------
     " Unused Plugins
@@ -169,11 +181,12 @@ nnoremap <leader>o :execute "normal! o\ek"<cr>
 nnoremap <leader>wd :execute "normal! $b\"acE\e\r\"bc$\e\"apa \e\"bpk0"<cr>
 " Move word to the previous line (Could use refining)
 nnoremap <leader>wu :execute "normal! k\r\"acE\exk$a \e\"apj0"<cr>
-" Cut line off at the space before eighty characters
-nnoremap <leader>tl :call CutLine()<cr>
 " Set paste and nopaste
 nnoremap <leader>sp :set paste<cr>
 nnoremap <leader>snp :set nopaste<cr>
+" Search
+nnoremap <leader>tf :Telescope find_files<cr>
+nnoremap <leader>tp :Telescope file_browser<cr>
 
 " File Manipulation mappings
 " (for opening, closing, saving, compiling, and running files)
@@ -707,10 +720,6 @@ function! LaTeXToPDF()
     let l:outremove="rm " . l:filename .".out"
     let x=system(l:dvipdfm)
     let x=system(l:auxremove . " && " . l:dviremove . " && " . l:logremove . " && " . l:outremove)
-endfunction
-
-function! CutLine()
-    execute "normal! 080lbbf r\nJ"
 endfunction
 
 " ============================================================================
