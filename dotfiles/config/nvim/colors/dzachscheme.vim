@@ -238,7 +238,7 @@ call s:Col('pythonStatement', 'orange')
 " GitGutter
 call s:Col('GitGutterAdd', 'green', s:linenr_background)
 call s:Col('GitGutterChange', 'cyan', s:linenr_background)
-call s:Col('GitGutterDelete', 'orange', s:linenr_background)
+call s:Col('GitGutterDelete', 'magenta', s:linenr_background)
 call s:Col('GitGutterChangeDelete', 'magenta', s:linenr_background)
 
 " CtrlP
@@ -251,6 +251,14 @@ call s:Col('CtrlPPtrCursor', 'base7')           " cursor in the prompt
 " unite.vim
 call s:Col('UniteGrep', 'base7', 'green')
 let g:unite_source_grep_search_word_highlight = 'UniteGrep'
+
+" coc.vim
+call s:Col('CocFloating', 'base6', 'base4')
+call s:Col('CocErrorSign', 'orange')
+call s:Col('CocHintSign', 'orange')
+call s:Col('FgCocErrorFloatBgCocFloating', 'orange', 'base4')
+call s:Col('FgCocHintFloatBgCocFloating', 'orange', 'base4')
+call s:Attr('CocUnderline', 'underline')
 
 
 " Cleanup =====================================================================

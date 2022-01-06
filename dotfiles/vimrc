@@ -102,14 +102,20 @@ call plug#begin('~/.vim/plugged')
     Plug 'psf/black'
     " Minimap
     " MIT
+    " Requires rust + cargo
     Plug 'wfxr/minimap.vim'
     " Intellisense/Language Server Protocol support for vim/neovim 
     " MIT
+    " Requires certain node versions, can install via nvm
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " :CocInstall coc-jedi
     " ^^^ pappasam/coc-jedi
     " :CocInstall coc-rust-analyzer
     " ^^^ fannheyward/coc-rust-analyzer
+    " :CocInstall coc-tsserver
+    " ^^^ neoclide/coc-tsserver
+    " BSD 3-Clause 'New' or 'Revised' License
+    " Plug 'wakatime/vim-wakatime'
 
     " -------------------------------------
     " Unlicensed Plugins
@@ -158,7 +164,7 @@ let mapleader = ' '
 "
 " Plugin mappings - for making plugins easier
 " NerdTree
-nnoremap <leader>nt :NERDTreeToggle<cr>
+nnoremap <leader>ntt :NERDTreeToggle<cr>
 " Minimap
 nnoremap <leader>mm :MinimapToggle<cr>100<C-w>w
 
@@ -185,8 +191,9 @@ nnoremap <leader>wu :execute "normal! k\r\"acE\exk$a \e\"apj0"<cr>
 nnoremap <leader>sp :set paste<cr>
 nnoremap <leader>snp :set nopaste<cr>
 " Search
-nnoremap <leader>tf :Telescope find_files<cr>
-nnoremap <leader>tp :Telescope file_browser<cr>
+nnoremap <leader><cr> :Telescope find_files prompt_prefix=🔍<cr>
+nnoremap <leader>nt :Telescope file_browser prompt_prefix=🔍<cr>
+nnoremap <leader>rg :Telescope live_grep prompt_prefix=🔍<cr>
 
 " File Manipulation mappings
 " (for opening, closing, saving, compiling, and running files)
@@ -219,7 +226,7 @@ nnoremap <leader>bn :bnext<cr>
 " Previous Buffer
 nnoremap <leader>nb :bprevious<cr>
 " Show registers
-nnoremap <leader>rg :registers<cr>
+nnoremap <leader>reg :registers<cr>
 " Run through pylint
 nnoremap <leader>pl :!pylint %:t<cr>
 " Run through pep8

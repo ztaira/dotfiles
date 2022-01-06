@@ -28,7 +28,7 @@ set title
 # ============================================================================
 # better ls
 alias ls="ls --color"
-alias la="ls -laFG --color"
+alias la="ls -laF --color"
 # git stuff
 alias gg="cd ~/Documents"
 alias gl="git log --graph"
@@ -51,25 +51,54 @@ alias gap="git add -p"
 alias gbr="git branch -r"
 alias gco="git checkout"
 alias gcf="git commit --fixup"
-alias gcfh="git commit --fixup HEAD"
 alias gdc="git diff --cached"
 alias gdn="git diff --name-only"
-alias gdom="git diff origin/master"
-alias gdnom="git diff --name-only origin/master"
+alias gdom="git diff origin/main"
+alias gdnom="git diff --name-only origin/main"
 alias gdcn="git diff --cached --name-only"
 alias gst="git stash"
 alias gsta="git stash apply"
 alias gstd="git stash drop"
 alias gre="git restore"
 alias gres="git restore --staged"
-alias gri="git rebase -i"
+alias gri="git rebase -i --autosquash"
 alias grc="git rebase --continue"
 alias grebs="git rebase --skip"
 alias grebc="git rebase --continue"
 alias gpsuo="git push --set-upstream origin"
-gdh() {
-  git diff "HEAD~${1}" "HEAD~${2}"
+
+function ghi() {
+  git_head_index -n 30
 }
+
+function gcfh() {
+  fixup=$1
+  echo '$fixup is the name of the game'
+  if [ -z ${fixup} ]; then
+    git commit --fixup HEAD
+  else
+    git commit --fixup HEAD~$fixup
+  fi
+}
+
+function gsh() {
+  head_pointer=$1
+  if [ -z ${head_pointer} ]; then
+    git show HEAD
+  else
+    git show HEAD~$head_pointer
+  fi
+}
+
+function gshs() {
+  head_pointer=$1
+  if [ -z ${head_pointer} ]; then
+    git show HEAD --oneline --no-patch
+  else
+    git show HEAD~$head_pointer --oneline --no-patch
+  fi
+}
+
 # by http://github.com/jehiah
 # this prints out some branch status (similar to the '... ahead' info you get from git status)
 # modified by me
@@ -79,10 +108,10 @@ gab() {
   do
       # echo ${remote}
       # [ -z "$remote" ] && continue
-      git rev-list --left-right ${local}...master -- 2>/dev/null >/tmp/git_upstream_status_delta || continue
+      git rev-list --left-right ${local}...main -- 2>/dev/null >/tmp/git_upstream_status_delta || continue
       LEFT_AHEAD=$(grep -c '^<' /tmp/git_upstream_status_delta)
       RIGHT_AHEAD=$(grep -c '^>' /tmp/git_upstream_status_delta)
-      echo "$local (ahead $LEFT_AHEAD) | (behind $RIGHT_AHEAD) master"
+      echo "$local (ahead $LEFT_AHEAD) | (behind $RIGHT_AHEAD) main"
   done
 }
 
@@ -135,7 +164,17 @@ alias psh="poetry shell"
 # hub
 alias "hi"="hub issue -^"
 alias "hpr"="hub pull-request"
+# %>8: left pad 8 spaces
+# %sC: set color to red or green depending on state
+# %i: PR number
+# %Creset: reset color
+# %t: PR title
+# %l: colored labels
+# %pC: set color according to pull request state
+# (%H): head branch
+# %n: newline
 alias "hprl"="hub pr list -f '%>(8)%sC%i %Creset%t%l%pC (%H)%n' -^"
+alias "hprs"="hub ci-status"
 # networking
 alias "ipbra"="ip -br a"
 # delete a line from the known hosts file
@@ -234,7 +273,8 @@ lmk_if_internet_sux() {
 # ============================================================================
 alertme() {
     local EXIT="$?"
-    silly_notify "$EXIT"
+    echo "Exited with code: ${EXIT}"
+    silly_notify "${EXIT}"
 }
 
 # ============================================================================
@@ -548,4 +588,11 @@ hg() {
     else
         history | tail -n 25
     fi
+}
+
+# ============================================================================
+# wifi info convenience function
+# ============================================================================
+function wifi_info() {
+    sudo cat /etc/NetworkManager/system-connections/$1.nmconnection
 }
