@@ -108,7 +108,7 @@ call plug#begin('~/.vim/plugged')
     " Intellisense/Language Server Protocol support for vim/neovim 
     " MIT
     " Requires certain node versions, can install via nvm
-    Plug 'neoclide/coc.nvim', {'commit': 'f6a947a8ebae47151da95425d1c0fec6d31c3de5'}
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     " :CocInstall coc-jedi
     " ^^^ pappasam/coc-jedi
     " :CocInstall coc-rust-analyzer
@@ -133,6 +133,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    " Plug 'github/copilot.vim'
 
     " -------------------------------------
     " Unused Plugins
@@ -266,6 +267,9 @@ nnoremap <leader>gp :!git push
 nnoremap <leader>gd :!git diff
 " Git Add
 nnoremap <leader>ga :!git add
+
+" SVG Notes open
+nnoremap <leader>gl :edit <cword>.md
 
 " VISUAL MAPS
 " Move variable amount of lines down and reselect in visual mode
@@ -719,14 +723,12 @@ function! DvorakLetter()
 endfunction
 
 function! LaTeXToPDF()
-    !latex %:t
+    !pdflatex %:t
     let l:filename=split(expand('%:t'), '\.')[0]
-    let l:dvipdfm="dvipdfm " . l:filename . ".dvi"
     let l:auxremove="rm " . l:filename .".aux"
     let l:dviremove="rm " . l:filename .".dvi"
     let l:logremove="rm " . l:filename .".log"
     let l:outremove="rm " . l:filename .".out"
-    let x=system(l:dvipdfm)
     let x=system(l:auxremove . " && " . l:dviremove . " && " . l:logremove . " && " . l:outremove)
 endfunction
 
@@ -750,11 +752,11 @@ set signcolumn=yes
 " no select by `"suggest.noselect": true` in your configuration file
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#pum#next(1) :
+"       \ CheckBackspace() ? "\<Tab>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice

@@ -128,8 +128,8 @@ set -o emacs
 # export EDITOR=/usr/bin/nvim
 # export GIT_EDITOR=/usr/bin/nvim
 # use nvim prerelease for git commit messages
-export EDITOR=/usr/bin/nvim.appimage
-export GIT_EDITOR=/usr/bin/nvim.appimage
+export EDITOR=/usr/local/bin/nvim.appimage
+export GIT_EDITOR=/usr/local/bin/nvim.appimage
 
 
 # Change volume via the terminal
@@ -218,6 +218,7 @@ __prompt_command() {
         PS1+="\n"
     fi
 
+    history -a
     PS1+="${MAG}(\$(parse_virtual_env)) ${BLU}\u${GRA} \\$ "
 }
 
@@ -596,3 +597,16 @@ hg() {
 function wifi_info() {
     sudo cat /etc/NetworkManager/system-connections/$1.nmconnection
 }
+
+# ============================================================================
+# Function to copy m3u8 things with ffmpeg
+# ============================================================================
+function m3u8_ffmpeg() {
+    ffmpeg -i "$1" -c copy "$2"
+}
+
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
