@@ -51,11 +51,7 @@ set expandtab
 " Continuous update of current song makes vim laggy
 " Therefore, that's only done on save
 set laststatus=2
-set statusline=
-            \%-20.20F
-            \%-20.20([b%n]%y%m%)
-            \%-20.20([%l,\ %c]%)
-autocmd BufWritePost * :call UpdateStatusline()
+set statusline=%-45.45(\ \[b%n\]%y\ %<%F%m%)%45.45([%1.5l/%L][%4v\]\ 0x%04B\ %)
 " Wrap
 set nowrap
 " Automatically open start.txt in a new window
@@ -319,43 +315,6 @@ function! VMoveLinesUp()
     let front = line("'<")
     let back = line("'>")
     execute "normal! " . front . "Gkdd" . back . "GPgv"
-endfunction
-
-" Function to get current song playing on Spotify
-function! GetCurrentSong()
-    " Get the current song title and trim the \n
-    let l:cname=system("osascript -e 'tell Application \"System Events\"\n
-                \ if application process \"Spotify\" exists then\n
-                \ tell application \"Spotify\" to name of
-                \ current track as string\n
-                \ end if\n
-                \ end tell'")
-    let l:cname = l:cname[:-2]
-    " Get the current song's artist and trim the \n
-    let l:cartist=system("osascript -e 'tell Application \"System Events\"\n
-                \ if application process \"Spotify\" exists then\n
-                \ tell application \"Spotify\" to artist of
-                \ current track as string\n
-                \ end if\n
-                \ end tell'")
-    let l:cartist = l:cartist[:-2]
-    " If there's no song, string=None. Else, string=Name-Artist
-    if strlen(l:cname)==?0
-        let l:cname="None"
-    else
-        let l:cname=l:cname . "-" . l:cartist
-    endif
-    return l:cname
-endfunction
-
-" function to update statusline
-function! UpdateStatusline()
-    let g:song=GetCurrentSong()
-    set statusline=
-                \%-35.35F
-                \%-20.20([%l,\ %c][b%n]%y%m%)
-                \%-20.20{g:song}
-                "\%-20.20([])
 endfunction
 
 " function to do or undo python or c comments
@@ -730,6 +689,15 @@ function! LaTeXToPDF()
     let l:logremove="rm " . l:filename .".log"
     let l:outremove="rm " . l:filename .".out"
     let x=system(l:auxremove . " && " . l:dviremove . " && " . l:logremove . " && " . l:outremove)
+endfunction
+
+function! OpenMdFileFromCursor()
+    " Get the word under the cursor
+    let l:word = expand('<cword>')
+    " Replace underscores with dashes
+    let l:filename = substitute(l:word, '_', '-', 'g') . '.md'
+    " Open the file in a new buffer
+    execute 'edit ' . l:filename
 endfunction
 
 " ============================================================================
