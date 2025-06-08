@@ -28,6 +28,6 @@ install: ## Install target
 	for directory in $(install_dirs); do \
 		echo $$directory; \
 		mkdir -p $(install_dir)/$$directory; \
-		cp -r $$directory $(install_dir)/$$directory; \
+		cp -r $$directory $(install_dir); \
 	done
 	@echo "Installation complete."
