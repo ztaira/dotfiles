@@ -6,7 +6,7 @@ install_dir := $(DESTDIR)$(prefix)/zt-dotfiles
 # List of files and directories to install
 files := $(wildcard *)
 exclude := Makefile setup.sh
-install_files = dotfiles/bashrc dotfiles/vimrc dotfiles/i3status.conf dotfiles/ripgreprc dotfiles/tmux.conf
+install_files = dotfiles/bashrc dotfiles/vimrc dotfiles/i3status.conf dotfiles/ripgreprc dotfiles/tmux.conf dotfiles/setup.sh
 install_dirs = dotfiles/config/i3 dotfiles/config/kitty dotfiles/config/nvim
 
 .PHONY: help docs

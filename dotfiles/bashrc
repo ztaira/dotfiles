@@ -367,8 +367,8 @@ todochange() {
     local col_name="$2"
     local col_value="$3"
     if [ -n "$col_value" ]; then
-        sqlite3 ~/todolist.db "update data set \"$col_name\"=\"$col_value\" \
-            where id=\"$task_id\";"
+        sqlite3 ~/todolist.db "update data set '$col_name'='$col_value' \
+            where id='$task_id';"
         echo "Task Updated! :D"
     else
         zmansynopsis todochange
@@ -439,7 +439,7 @@ todonew() {
             task_start=`date +"%Y-%m-%d"`
         fi
         sqlite3 ~/todolist.db "insert into data ('name', 'start', 'end', 'notes', 'parent') \
-            values (\"$task_name\", \"$task_start\", \"$task_end\", \"$task_notes\", \"$task_parent\");"
+            values ('$task_name', '$task_start', '$task_end', '$task_notes', '$task_parent');"
         echo "New task created! :D"
     else
         zmansynopsis todonew
