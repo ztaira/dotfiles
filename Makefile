@@ -19,15 +19,13 @@ help: ## List Makefile targets
 
 install: ## Install target
 	@echo "Installing files to $(install_dir)..."
-	# install -d $(install_dir)
-	install -d $(install_dir)/dotfiles
+	install -d $(install_dir)/dotfiles/config
 	for file in $(install_files); do \
 		echo $$file; \
 		install $$file $(install_dir)/$$file; \
 	done
 	for directory in $(install_dirs); do \
 		echo $$directory; \
-		mkdir -p $(install_dir)/$$directory; \
-		cp -r $$directory $(install_dir); \
+		cp -r $$directory $(install_dir)/dotfiles/config/; \
 	done
 	@echo "Installation complete."
