@@ -15,7 +15,9 @@ setxkbmap -layout us,us -variant dvorak, -option "lv3:rwin_switch,grp:alt_space_
 source ~/.cargo/env
 export PATH=$PATH:~/.local/bin # add .local/bin to path
 export HISTSIZE="" # linux: infinite history
+export HISTTIMEFORMAT='%F %T ' # save bash timestamps
 export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
+export SHELL_UUID=$(uuidgen)
 sauce() {
   source ~/.bash_secrets
 }
@@ -219,7 +221,7 @@ __prompt_command() {
     fi
 
     history -a
-    PS1+="${MAG}(\$(parse_virtual_env)) ${BLU}\u${GRA} \\$ "
+    PS1+="${MAG}(\$(parse_virtual_env)) ${BLU}$(date '+%H:%M:%S') \u${GRA} ${SHELL_LOGGING}\\$ "
 }
 
 __prompt_command_blind() {
@@ -605,8 +607,13 @@ function m3u8_ffmpeg() {
     ffmpeg -i "$1" -c copy "$2"
 }
 
-. "$HOME/.cargo/env"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# ============================================================================
+# Function to start logging this shell
+# ============================================================================
+# don't want to log everything all the time to prevent leaking secrets
+function start_logging() {
+  mkdir -p ~/.bash_history.d/
+  exec &> >(tee -a ~/.bash_history.d/${SHELL_UUID}.log)
+  echo "Logging for shell ${SHELL_UUID}"
+  export SHELL_LOGGING="LOGGING "
+}
