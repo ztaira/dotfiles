@@ -11,7 +11,7 @@ fi
 #==========================================================
 # Install tmux plugins
 #==========================================================
-rm -r ~/.tmux/plugins
+rm -r ~/.tmux/plugins || true
 mkdir -p ~/.tmux/plugins
 git clone https://github.com/jaclu/tmux-menus ~/.tmux/plugins/tmux-menus
 
