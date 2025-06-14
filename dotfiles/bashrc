@@ -5,20 +5,22 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # clear the keyboard mapping of options
-# necessary to run before setting since options are sticky
-setxkbmap -layout us,us -variant dvorak, -option
-# map capslock to escape
-setxkbmap -option caps:escape
-# map alt-space to switch between dvorak and qwerty layouts
-# dvorak is first
-setxkbmap -layout us,us -variant dvorak, -option "lv3:rwin_switch,grp:alt_space_toggle"
-source ~/.cargo/env
+if [ -f /usr/bin/setxkbmap ]; then
+  # necessary to run before setting since options are sticky
+  setxkbmap -layout us,us -variant dvorak, -option
+  # map capslock to escape
+  setxkbmap -option caps:escape
+  # map alt-space to switch between dvorak and qwerty layouts
+  # dvorak is first
+  setxkbmap -layout us,us -variant dvorak, -option "lv3:rwin_switch,grp:alt_space_toggle"
+fi
 export PATH=$PATH:~/.local/bin # add .local/bin to path
 export HISTSIZE="" # linux: infinite history
 export HISTTIMEFORMAT='%F %T ' # save bash timestamps
 export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 export SHELL_UUID=$(uuidgen)
 sauce() {
+  touch ~/.bash_secrets
   source ~/.bash_secrets
 }
 sauce
