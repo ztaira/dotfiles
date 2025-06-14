@@ -19,6 +19,7 @@ git clone https://github.com/jaclu/tmux-menus ~/.tmux/plugins/tmux-menus
 # Install config files
 #==========================================================
 rm -r ~/.tmux.conf ~/.bashrc ~/.vimrc ~/.config/i3 ~/.config/nvim ~/.config/kitty ~/.vim ~/.rgrc ~/.i3status.conf || true
+mkdir -p ~/.config
 
 # rc files
 ln -s ${source_directory}/bashrc ~/.bashrc
