@@ -129,11 +129,8 @@ alias matlab='/Applications/MATLAB_R2014b.app/bin/matlab -nodesktop'
 # hey, gotta get some emacs experience somehow
 set -o emacs
 # use nvim for git commit messages
-# export EDITOR=/usr/bin/nvim
-# export GIT_EDITOR=/usr/bin/nvim
-# use nvim prerelease for git commit messages
-export EDITOR=/usr/local/bin/nvim.appimage
-export GIT_EDITOR=/usr/local/bin/nvim.appimage
+export EDITOR=/usr/bin/nvim
+export GIT_EDITOR=/usr/bin/nvim
 
 
 # Change volume via the terminal
@@ -141,7 +138,7 @@ alias vol="alsamixer" # linux: get a TUI for volume
 # Use nvim for vi
 # alias vi="nvim"
 # Use nvim prerelease for vi
-alias vi="nvim.appimage"
+alias vi="nvim"
 alias vim="/usr/bin/vi"
 # Open
 alias win="xdg-open ." # linux: open a new window
